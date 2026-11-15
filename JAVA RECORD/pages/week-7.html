@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 7: Generic Servlet and HTTP Servlet in NetBeans | Lab Record</title>
+  <meta name="description" content="Modular Java Web Applications on Apache Tomcat implementing GenericServlet, HttpServlet, GET/POST handlers, and dynamic forms. - Advanced Java Programming Lab (24IT385) by CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145)" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP HEADER -->
+  <header class="main-portal-header">
+    <div class="header-top-bar">
+            <div class="header-student-pill" id="studentProfileTrigger" role="button" tabindex="0" title="Click to view student academic details" aria-haspopup="dialog">
+        <div class="student-avatar-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-avatar-img" />
+          <span class="student-status-indicator" title="Active Candidate"></span>
+        </div>
+        <div class="student-pill-info">
+          <span class="student-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN <span class="profile-hint">Details</span></span>
+          <span class="student-dept">IT · Siddhartha Academy of Higher Education</span>
+        </div>
+      </div>
+      <div class="header-center-branding">
+        <h1 class="header-main-title">ADVANCED JAVA PROGRAMMING</h1>
+        <div class="header-roll-sub">Roll Number: <span class="roll-badge">24EU08145</span></div>
+      </div>
+      <div class="header-right-tools">
+        <a href="../../24EU08145.html" class="header-tool-btn">🏠 Home Hub</a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Week Navigation">
+          <i class="bi bi-layout-sidebar-inset"></i> <span>Weeks</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- LEFT SIDEBAR: WEEK-WISE NAVIGATION -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="bi bi-journal-code"></i> Digital Lab Record
+        </div>
+        <div class="sidebar-subtitle">Weeks 0 — 13 Navigation · 24IT385</div>
+      </div>
+
+      <div class="sidebar-search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="weekSearchInput" placeholder="Filter week or task..." />
+      </div>
+
+      <nav class="sidebar-week-nav" role="navigation" aria-label="Lab Weeks Navigation">
+        <div class="sidebar-week-group " data-week="0">
+          <a href="week-0.html" class="sidebar-week-link" data-week="0">
+            <span class="week-pill">W0</span>
+            <span class="week-title-text">Intro & Theory</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-1" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-1" title="Task 1: Introduction to Advanced Java">Task 1: Introduction to Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-1" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-1" title="P1: Architectural Foundations"><span class="prog-dot"></span>P1: Architectural Foundations</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-2" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-2" title="Task 2: Core Java vs Advanced Java">Task 2: Core Java vs Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-2" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-2" title="P1: ArchitecturalComparison.java"><span class="prog-dot"></span>P1: ArchitecturalComparison.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-3" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-3" title="Task 3: Java Applets and Servlets">Task 3: Java Applets and Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-3" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-3" title="P1: Applet vs Servlet Lifecycle"><span class="prog-dot"></span>P1: Applet vs Servlet Lifecycle</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-4" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-4" title="Task 4: JDBC and ODBC">Task 4: JDBC and ODBC</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-4" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-4" title="P1: JDBC vs ODBC Drivers"><span class="prog-dot"></span>P1: JDBC vs ODBC Drivers</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-5" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-5" title="Task 5: Cookies and Sessions">Task 5: Cookies and Sessions</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-5" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-5" title="P1: State Protocols & Cookies"><span class="prog-dot"></span>P1: State Protocols & Cookies</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="1">
+          <a href="week-1.html" class="sidebar-week-link" data-week="1">
+            <span class="week-pill">W1</span>
+            <span class="week-title-text">Language Paradigms</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-1.html#week-1-task-1" class="sidebar-task-link" data-week="1" data-task-anchor="week-1-task-1" title="Task 1: Advanced Java Lab Assignment">Task 1: Advanced Java Lab Assignment</a>
+            <div class="sidebar-prog-list">
+              <a href="week-1.html#week-1-task-1" class="sidebar-prog-link" data-week="1" data-prog-anchor="week-1-task-1" title="P1: ConcurrencyBenchmark.java"><span class="prog-dot"></span>P1: ConcurrencyBenchmark.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="2">
+          <a href="week-2.html" class="sidebar-week-link" data-week="2">
+            <span class="week-pill">W2</span>
+            <span class="week-title-text">Environment Setup</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-2.html#week-2-task-1" class="sidebar-task-link" data-week="2" data-task-anchor="week-2-task-1" title="Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu">Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu</a>
+            <div class="sidebar-prog-list">
+              <a href="week-2.html#week-2-task-1" class="sidebar-prog-link" data-week="2" data-prog-anchor="week-2-task-1" title="P1: setup_jdk26.sh"><span class="prog-dot"></span>P1: setup_jdk26.sh</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="3">
+          <a href="week-3.html" class="sidebar-week-link" data-week="3">
+            <span class="week-pill">W3</span>
+            <span class="week-title-text">MS Access JDBC</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-3.html#week-3-task-1" class="sidebar-task-link" data-week="3" data-task-anchor="week-3-task-1" title="Task 1: Java MS Access Connectivity Using UCanAccess">Task 1: Java MS Access Connectivity Using UCanAccess</a>
+            <div class="sidebar-prog-list">
+              <a href="week-3.html#week-3-task-1" class="sidebar-prog-link" data-week="3" data-prog-anchor="week-3-task-1" title="P1: AccessDemo.java"><span class="prog-dot"></span>P1: AccessDemo.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="4">
+          <a href="week-4.html" class="sidebar-week-link" data-week="4">
+            <span class="week-pill">W4</span>
+            <span class="week-title-text">Remote MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-4.html#week-4-task-1" class="sidebar-task-link" data-week="4" data-task-anchor="week-4-task-1" title="Task 1: Remote MySQL Database Connectivity">Task 1: Remote MySQL Database Connectivity</a>
+            <div class="sidebar-prog-list">
+              <a href="week-4.html#week-4-task-1" class="sidebar-prog-link" data-week="4" data-prog-anchor="week-4-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="5">
+          <a href="week-5.html" class="sidebar-week-link" data-week="5">
+            <span class="week-pill">W5</span>
+            <span class="week-title-text">MySQL Operations</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-5.html#week-5-task-1" class="sidebar-task-link" data-week="5" data-task-anchor="week-5-task-1" title="Task 1: Remote MySQL Database Operations">Task 1: Remote MySQL Database Operations</a>
+            <div class="sidebar-prog-list">
+              <a href="week-5.html#week-5-task-1" class="sidebar-prog-link" data-week="5" data-prog-anchor="week-5-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="6">
+          <a href="week-6.html" class="sidebar-week-link" data-week="6">
+            <span class="week-pill">W6</span>
+            <span class="week-title-text">JDBC CRUD</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-6.html#week-6-task-1" class="sidebar-task-link" data-week="6" data-task-anchor="week-6-task-1" title="Task 1: JDBC CRUD Operations on Student Database">Task 1: JDBC CRUD Operations on Student Database</a>
+            <div class="sidebar-prog-list">
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P1: INSERT Operation"><span class="prog-dot"></span>P1: INSERT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P2: SELECT Operation"><span class="prog-dot"></span>P2: SELECT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P3: UPDATE Operation"><span class="prog-dot"></span>P3: UPDATE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P4: DELETE Operation"><span class="prog-dot"></span>P4: DELETE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P5: StudentCRUD.java"><span class="prog-dot"></span>P5: StudentCRUD.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group active open" data-week="7">
+          <a href="week-7.html" class="sidebar-week-link" data-week="7">
+            <span class="week-pill">W7</span>
+            <span class="week-title-text">Servlets & NetBeans</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-1" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-1" title="Task 1: NetBeans Web Application Creation & index.html">Task 1: NetBeans Web Application Creation & index.html</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-1" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-1" title="P1: index.html (Form UI)"><span class="prog-dot"></span>P1: index.html (Form UI)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-2" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-2" title="Task 2: HTTP Servlet Rendering Student Details (24EU08145)">Task 2: HTTP Servlet Rendering Student Details (24EU08145)</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-2" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-2" title="P1: NewServlet.java (HttpServlet)"><span class="prog-dot"></span>P1: NewServlet.java (HttpServlet)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-3" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-3" title="Task 3: HTTP GET & POST Servlet Handling">Task 3: HTTP GET & POST Servlet Handling</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-3" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-3" title="P1: GetPostServlet.java (GET/POST)"><span class="prog-dot"></span>P1: GetPostServlet.java (GET/POST)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-4" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-4" title="Task 4: Generic Servlet Implementation">Task 4: Generic Servlet Implementation</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-4" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-4" title="P1: MyGenericServlet.java"><span class="prog-dot"></span>P1: MyGenericServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-5" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-5" title="Task 5: Servlet Life Cycle Demonstration">Task 5: Servlet Life Cycle Demonstration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-5" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-5" title="P1: LifeCycleServlet.java"><span class="prog-dot"></span>P1: LifeCycleServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-7-task-6" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-6" title="Task 6: Interactive Student Registration Form">Task 6: Interactive Student Registration Form</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-6" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-6" title="P1: StudentFormServlet.java"><span class="prog-dot"></span>P1: StudentFormServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="8">
+          <a href="week-8.html" class="sidebar-week-link" data-week="8">
+            <span class="week-pill">W8</span>
+            <span class="week-title-text">Web Apps & Cookies</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-1" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-1" title="Task 1: Student Management System using Servlets, JDBC and MySQL">Task 1: Student Management System using Servlets, JDBC and MySQL</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P1: DBConnection.java"><span class="prog-dot"></span>P1: DBConnection.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P2: Student.java"><span class="prog-dot"></span>P2: Student.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P3: StudentDAO.java"><span class="prog-dot"></span>P3: StudentDAO.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P4: StudentServlet.java"><span class="prog-dot"></span>P4: StudentServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-2" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-2" title="Task 2: Cookies Demonstration Using Java Servlets">Task 2: Cookies Demonstration Using Java Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P1: SetCookieServlet.java"><span class="prog-dot"></span>P1: SetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P2: GetCookieServlet.java"><span class="prog-dot"></span>P2: GetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P3: DeleteCookieServlet.java"><span class="prog-dot"></span>P3: DeleteCookieServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="9">
+          <a href="week-9.html" class="sidebar-week-link" data-week="9">
+            <span class="week-pill">W9</span>
+            <span class="week-title-text">Maven & Spring Boot</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-1" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-1" title="Task 1: Steps to Build Maven & Spring Boot in STS">Task 1: Steps to Build Maven & Spring Boot in STS</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-1" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-1" title="P1: HelloController.java"><span class="prog-dot"></span>P1: HelloController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-2" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-2" title="Task 2: Develop Simple Spring Boot Web App">Task 2: Develop Simple Spring Boot Web App</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-2" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-2" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-3" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-3" title="Task 3: POM.xml Configuration">Task 3: POM.xml Configuration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-3" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-3" title="P3: pom.xml (Maven POM)"><span class="prog-dot"></span>P3: pom.xml (Maven POM)</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="10">
+          <a href="week-10.html" class="sidebar-week-link" data-week="10">
+            <span class="week-pill">W10</span>
+            <span class="week-title-text">JdbcTemplate & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-10.html#week-10-task-1" class="sidebar-task-link" data-week="10" data-task-anchor="week-10-task-1" title="Task 1: Spring Boot JdbcTemplate with In-Memory H2">Task 1: Spring Boot JdbcTemplate with In-Memory H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P1: schema.sql (H2 DDL)"><span class="prog-dot"></span>P1: schema.sql (H2 DDL)</a>
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P2: AuthorService.java"><span class="prog-dot"></span>P2: AuthorService.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="11">
+          <a href="week-11.html" class="sidebar-week-link" data-week="11">
+            <span class="week-pill">W11</span>
+            <span class="week-title-text">JPA with MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-11.html#week-11-task-1" class="sidebar-task-link" data-week="11" data-task-anchor="week-11-task-1" title="Task 1: Spring Boot JPA with MySQL & Web Interface">Task 1: Spring Boot JPA with MySQL & Web Interface</a>
+            <div class="sidebar-prog-list">
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P1: Employee.java (JPA Entity)"><span class="prog-dot"></span>P1: Employee.java (JPA Entity)</a>
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P2: EmployeeRepository.java"><span class="prog-dot"></span>P2: EmployeeRepository.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="12">
+          <a href="week-12.html" class="sidebar-week-link" data-week="12">
+            <span class="week-pill">W12</span>
+            <span class="week-title-text">Spring Data JPA & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-12.html#week-12-task-1" class="sidebar-task-link" data-week="12" data-task-anchor="week-12-task-1" title="Task 1: Spring Data JPA Repository Operations with H2">Task 1: Spring Data JPA Repository Operations with H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P1: Student.java (JPA Entity)"><span class="prog-dot"></span>P1: Student.java (JPA Entity)</a>
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="13">
+          <a href="week-13.html" class="sidebar-week-link" data-week="13">
+            <span class="week-pill">W13</span>
+            <span class="week-title-text">Derived & Custom Queries</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-13.html#week-13-task-1" class="sidebar-task-link" data-week="13" data-task-anchor="week-13-task-1" title="Task 1: Derived and Custom Query Methods in Spring Data JPA">Task 1: Derived and Custom Query Methods in Spring Data JPA</a>
+            <div class="sidebar-prog-list">
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P1: StudentRepository.java"><span class="prog-dot"></span>P1: StudentRepository.java</a>
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P2: 8 Derived & Native Queries"><span class="prog-dot"></span>P2: 8 Derived & Native Queries</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="portal-main-content" id="portalMainContent">
+
+      <div class="week-main-header">
+        <div class="week-super-meta">
+          <span class="week-number-badge">WEEK 07</span>
+          <span class="week-category-tag">Servlets & Web</span>
+          <span class="week-roll-tag">Roll: 24EU08145</span>
+        </div>
+        <h1 class="week-display-title">WEEK 7: GENERIC SERVLET AND HTTP SERVLET IN NETBEANS</h1>
+        <p class="week-overview-desc">Modular Java Web Applications on Apache Tomcat implementing GenericServlet, HttpServlet, GET/POST handlers, and dynamic forms.</p>
+      </div>
+
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title"><span class="section-icon">🎯</span> 1. Aim</h2>
+          <p>
+            To design, configure, and execute modular Java Web Applications in NetBeans IDE 8.2 deployed on Apache Tomcat Server, implementing:
+          </p>
+          <ul style="margin-left:24px;line-height:1.8;color:var(--text-sub);">
+            <li><strong>HTTP Servlet (NewServlet):</strong> Rendering styled student identity details (Roll Number: <strong>24EU08145</strong>).</li>
+            <li><strong>HTTP GET &amp; POST Servlet (GetPostServlet):</strong> Intercepting HTTP form dispatches with distinct <code>doGet()</code> and <code>doPost()</code> request handlers.</li>
+            <li><strong>Generic Servlet (MyGenericServlet):</strong> Extending protocol-independent <code>javax.servlet.GenericServlet</code> and implementing the <code>service()</code> lifecycle hook.</li>
+            <li><strong>Servlet Life Cycle (LifeCycleServlet):</strong> Implementing <code>javax.servlet.Servlet</code> to log and demonstrate the three fundamental phases: <code>init()</code>, <code>service()</code>, and <code>destroy()</code>.</li>
+            <li><strong>Student Registration Portal (StudentFormServlet):</strong> Form-based data ingestion rendering candidate submission output (Name: <strong>pooja</strong>, Roll No: <strong>145</strong>, Dept: <strong>it</strong>).</li>
+          </ul>
+        </section>
+
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 2. Software Requirements</h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">💻 Development Environment</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>IDE: NetBeans IDE 8.2 (Java EE Pack)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Web Container: Apache Tomcat Server 8.x / 9.x</div>
+                <div class="req-item"><span class="req-item-dot"></span>Java Platform: JDK 8+ with Servlet API</div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">🌐 Client &amp; Networking</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Client: Web Browser (Chrome / Edge / Internet Explorer)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Target Port: HTTP Port 8080</div>
+                <div class="req-item"><span class="req-item-dot"></span>Deployment Contexts: /WebApplication8 and /GenericServletDemo</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="procedure">
+          <h2 class="content-section-title"><span class="section-icon">🔧</span> 3. Step-by-Step Procedure</h2>
+          <div class="timeline-procedure">
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📁</div><div class="timeline-title">Step 1: Web Application Initialization</div></div>
+                <div class="timeline-desc">Launch NetBeans 8.2 → File → New Project → Java Web → Web Application. Name project <code>WebApplication8</code> and select Apache Tomcat as the runtime container.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🌐</div><div class="timeline-title">Step 2: HTML Page Authoring</div></div>
+                <div class="timeline-desc">Under <code>Web Pages</code>, configure <code>index.html</code> with document headers and test browser connectivity at <code>http://localhost:8080/WebApplication8/</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">☕</div><div class="timeline-title">Step 3: Implement NewServlet (HttpServlet with 24EU08145)</div></div>
+                <div class="timeline-desc">Create <code>NewServlet.java</code> extending <code>HttpServlet</code>. In <code>processRequest()</code>, output candidate details (Roll Number: <strong>24EU08145</strong>).</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🔄</div><div class="timeline-title">Step 4: Implement GET &amp; POST Handling (GetPostServlet)</div></div>
+                <div class="timeline-desc">Author <code>GetPostServlet.java</code> overriding both <code>doGet()</code> and <code>doPost()</code>, reading query parameters via <code>request.getParameter("name")</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">5</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">⚙️</div><div class="timeline-title">Step 5: GenericServlet &amp; Servlet Lifecycle Implementation</div></div>
+                <div class="timeline-desc">Create <code>GenericServletDemo</code> project. Implement <code>MyGenericServlet</code> (overriding <code>service()</code>) and <code>LifeCycleServlet</code> (implementing <code>init()</code>, <code>service()</code>, <code>destroy()</code>).</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">6</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📋</div><div class="timeline-title">Step 6: Interactive Student Registration Form</div></div>
+                <div class="timeline-desc">Create <code>form.html</code> with fields for Name, Roll No, and Department. Route POST submission to <code>StudentFormServlet</code> to render submitted data dynamically.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 1 -->
+        <section class="content-section" id="week-7-task-1" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">📁</span> 4. Activity 1: NetBeans Web Application Creation &amp; index.html</h2>
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans IDE Project Proof</span>
+                <span class="proof-title">NetBeans 8.2 Workspace — WebApplication8 Hierarchy</span>
+              </div>
+              <div class="ss-img-wrap" data-title="NetBeans WebApplication8 Project Hierarchy">
+                <img src="../assets/images/week-7/w7_web_app_setup.png" alt="NetBeans WebApplication8 Project Setup" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans IDE 8.2 workspace screenshot verifying project tree, Web Pages, WEB-INF, and index.html.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">🌐</span> index.html</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-code-btn" data-filename="index.html">⬇ Download HTML</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;TODO supply a title&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div&gt;ADVANCED JAVA PROGRAMMING LAB 24EU08145&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 2 -->
+        <section class="content-section" id="week-7-task-2" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">☕</span> 5. Activity 2: HTTP Servlet Rendering Student Details (24EU08145)</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans Source Code Proof</span>
+                <span class="proof-title">NetBeans IDE — NewServlet.java Code Displaying Roll: 24EU08145</span>
+              </div>
+              <div class="ss-img-wrap" data-title="NewServlet.java Code Proof">
+                <img src="../assets/images/week-7/w7_newservlet_code_24EU08145.png" alt="NewServlet.java Code Displaying Roll 24EU08145" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans code editor proof verifying processRequest() writing Roll Number: 24EU08145.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Web Browser — NewServlet Student Details Output (24EU08145)</span>
+              </div>
+              <div class="ss-img-wrap" data-title="NewServlet Browser Output Proof">
+                <img src="../assets/images/week-7/w7_newservlet_browser_24EU08145.png" alt="NewServlet Browser Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser execution proof showing ADVANCED JAVA LAB, STUDENT DETAILS, Roll Number: 24EU08145.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> NewServlet.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="NewServlet.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="kw">import</span> <span class="pk">java.io.IOException</span>;
+<span class="kw">import</span> <span class="pk">java.io.PrintWriter</span>;
+<span class="kw">import</span> <span class="pk">javax.servlet.ServletException</span>;
+<span class="kw">import</span> <span class="pk">javax.servlet.http.HttpServlet</span>;
+<span class="kw">import</span> <span class="pk">javax.servlet.http.HttpServletRequest</span>;
+<span class="kw">import</span> <span class="pk">javax.servlet.http.HttpServletResponse</span>;
+
+<span class="kw">public class</span> <span class="ty">NewServlet</span> <span class="kw">extends</span> <span class="ty">HttpServlet</span> {
+    <span class="kw">protected void</span> <span class="fn">processRequest</span>(<span class="ty">HttpServletRequest</span> request, <span class="ty">HttpServletResponse</span> response)
+            <span class="kw">throws</span> <span class="ty">ServletException</span>, <span class="ty">IOException</span> {
+        response.<span class="fn">setContentType</span>(<span class="str">"text/html;charset=UTF-8"</span>);
+        <span class="kw">try</span> (<span class="ty">PrintWriter</span> out = response.<span class="fn">getWriter</span>()) {
+            out.<span class="fn">println</span>(<span class="str">"&lt;!DOCTYPE html&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;html&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;head&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;title&gt;Student Details&lt;/title&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;/head&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;body&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;h1&gt;ADVANCED JAVA LAB&lt;/h1&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;STUDENT DETAILS&lt;/h2&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Roll Number:&lt;/b&gt; 24EU08145&lt;/p&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Subject:&lt;/b&gt; Advanced Java&lt;/p&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Lab:&lt;/b&gt; Advanced Java Lab&lt;/p&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;/body&gt;"</span>);
+            out.<span class="fn">println</span>(<span class="str">"&lt;/html&gt;"</span>);
+        }
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 3 -->
+        <section class="content-section" id="week-7-task-3" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">🔄</span> 6. Activity 3: GET &amp; POST Request Handling (GetPostServlet.java)</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans Source Code Proof</span>
+                <span class="proof-title">GetPostServlet.java Code &amp; index.html Form</span>
+              </div>
+              <div class="ss-img-wrap" data-title="GetPostServlet.java Source Code Proof">
+                <img src="../assets/images/week-7/w7_get_post_servlet_code.png" alt="GetPostServlet.java Source Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans code editor proof verifying doGet() and doPost() method implementations.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Browser GET &amp; POST Responses ("Hello pooja!")</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Browser GET Request Output">
+                <img src="../assets/images/week-7/w7_get_request_output.png" alt="Browser GET Request Output" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser output confirming GET request processing: "Hello pooja! This is a GET request."</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> GetPostServlet.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="GetPostServlet.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="an">@WebServlet</span>(<span class="str">"/GetPostServlet"</span>)
+<span class="kw">public class</span> <span class="ty">GetPostServlet</span> <span class="kw">extends</span> <span class="ty">HttpServlet</span> {
+    <span class="kw">protected void</span> <span class="fn">doGet</span>(<span class="ty">HttpServletRequest</span> request, <span class="ty">HttpServletResponse</span> response)
+            <span class="kw">throws</span> <span class="ty">ServletException</span>, <span class="ty">IOException</span> {
+        response.<span class="fn">setContentType</span>(<span class="str">"text/html"</span>);
+        <span class="ty">PrintWriter</span> out = response.<span class="fn">getWriter</span>();
+        <span class="ty">String</span> name = request.<span class="fn">getParameter</span>(<span class="str">"name"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;GET Request&lt;/h2&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;Hello "</span> + name + <span class="str">"!&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;This is a GET request.&lt;/p&gt;"</span>);
+    }
+
+    <span class="kw">protected void</span> <span class="fn">doPost</span>(<span class="ty">HttpServletRequest</span> request, <span class="ty">HttpServletResponse</span> response)
+            <span class="kw">throws</span> <span class="ty">ServletException</span>, <span class="ty">IOException</span> {
+        response.<span class="fn">setContentType</span>(<span class="str">"text/html"</span>);
+        <span class="ty">PrintWriter</span> out = response.<span class="fn">getWriter</span>();
+        <span class="ty">String</span> name = request.<span class="fn">getParameter</span>(<span class="str">"name"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;POST Request&lt;/h2&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;Hello "</span> + name + <span class="str">"!&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;This is a POST request.&lt;/p&gt;"</span>);
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 4 -->
+        <section class="content-section" id="week-7-task-4" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 7. Activity 4: Generic Servlet Implementation (MyGenericServlet.java)</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans Source Code Proof</span>
+                <span class="proof-title">MyGenericServlet.java Code Editor — service() Override</span>
+              </div>
+              <div class="ss-img-wrap" data-title="MyGenericServlet Code Proof">
+                <img src="../assets/images/week-7/w7_generic_servlet_code.png" alt="MyGenericServlet Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans code editor proof verifying class extending GenericServlet.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Browser Output — Generic Servlet Dynamic Output</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Generic Servlet Output Proof">
+                <img src="../assets/images/week-7/w7_generic_servlet_output.png" alt="Generic Servlet Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser execution proof showing: "This servlet extends GenericServlet. Hello from GenericServlet!"</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">⚙️</span> MyGenericServlet.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="MyGenericServlet.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="an">@WebServlet</span>(<span class="str">"/MyGenericServlet"</span>)
+<span class="kw">public class</span> <span class="ty">MyGenericServlet</span> <span class="kw">extends</span> <span class="ty">GenericServlet</span> {
+    <span class="kw">public void</span> <span class="fn">service</span>(<span class="ty">ServletRequest</span> request, <span class="ty">ServletResponse</span> response)
+            <span class="kw">throws</span> <span class="ty">ServletException</span>, <span class="ty">IOException</span> {
+        response.<span class="fn">setContentType</span>(<span class="str">"text/html"</span>);
+        <span class="ty">PrintWriter</span> out = response.<span class="fn">getWriter</span>();
+        out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;Generic Servlet&lt;/h2&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;This servlet extends GenericServlet.&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;Hello from GenericServlet!&lt;/p&gt;"</span>);
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 5 -->
+        <section class="content-section" id="week-7-task-5" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">⏳</span> 8. Activity 5: Servlet Life Cycle Implementation (LifeCycleServlet.java)</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans Source Code Proof</span>
+                <span class="proof-title">LifeCycleServlet.java Code — init(), service() &amp; destroy()</span>
+              </div>
+              <div class="ss-img-wrap" data-title="LifeCycleServlet Code Proof">
+                <img src="../assets/images/week-7/w7_lifecycle_servlet_code.png" alt="LifeCycleServlet Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans code editor proof verifying class implementing Servlet interface lifecycle methods.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Browser Output — Servlet Life Cycle Phase Display</span>
+              </div>
+              <div class="ss-img-wrap" data-title="LifeCycleServlet Output Proof">
+                <img src="../assets/images/week-7/w7_lifecycle_servlet_output.png" alt="LifeCycleServlet Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser execution proof showing init(): Servlet Initialized, service(): Request Processed.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">⏳</span> LifeCycleServlet.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="LifeCycleServlet.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="an">@WebServlet</span>(<span class="str">"/LifeCycleServlet"</span>)
+<span class="kw">public class</span> <span class="ty">LifeCycleServlet</span> <span class="kw">implements</span> <span class="ty">Servlet</span> {
+    <span class="kw">public void</span> <span class="fn">init</span>(<span class="ty">ServletConfig</span> config) { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"init() method called"</span>); }
+    <span class="kw">public</span> <span class="ty">ServletConfig</span> <span class="fn">getServletConfig</span>() { <span class="kw">return null</span>; }
+    <span class="kw">public void</span> <span class="fn">service</span>(<span class="ty">ServletRequest</span> req, <span class="ty">ServletResponse</span> res) <span class="kw">throws</span> <span class="ty">IOException</span> {
+        res.<span class="fn">setContentType</span>(<span class="str">"text/html"</span>);
+        <span class="ty">PrintWriter</span> out = res.<span class="fn">getWriter</span>();
+        out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;Servlet Life Cycle&lt;/h2&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;init():&lt;/b&gt; Servlet Initialized&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;service():&lt;/b&gt; Request Processed&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;destroy():&lt;/b&gt; Servlet Destroyed&lt;/p&gt;"</span>);
+    }
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getServletInfo</span>() { <span class="kw">return</span> <span class="str">"Life Cycle Servlet"</span>; }
+    <span class="kw">public void</span> <span class="fn">destroy</span>() { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"destroy() method called"</span>); }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 6 -->
+        <section class="content-section" id="week-7-task-6" class="task-section content-section">
+          <h2 class="content-section-title"><span class="section-icon">📋</span> 9. Activity 6: Interactive Student Registration Form Processing</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Form Input Proof</span>
+                <span class="proof-title">Student Registration Form — Inputs (pooja, 145, it)</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Student Form Input Proof">
+                <img src="../assets/images/week-7/w7_student_form_browser_input.png" alt="Student Form Input Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser form proof filled with Name: pooja, Roll No: 145, Department: it.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Submitted Output Proof</span>
+                <span class="proof-title">StudentFormServlet Response Output</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Student Form Output Proof">
+                <img src="../assets/images/week-7/w7_student_form_browser_output.png" alt="Student Form Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser response confirming dynamic processing of submitted candidate records.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">📋</span> StudentFormServlet.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="StudentFormServlet.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="an">@WebServlet</span>(<span class="str">"/StudentFormServlet"</span>)
+<span class="kw">public class</span> <span class="ty">StudentFormServlet</span> <span class="kw">extends</span> <span class="ty">HttpServlet</span> {
+    <span class="kw">protected void</span> <span class="fn">doPost</span>(<span class="ty">HttpServletRequest</span> request, <span class="ty">HttpServletResponse</span> response)
+            <span class="kw">throws</span> <span class="ty">ServletException</span>, <span class="ty">IOException</span> {
+        response.<span class="fn">setContentType</span>(<span class="str">"text/html"</span>);
+        <span class="ty">PrintWriter</span> out = response.<span class="fn">getWriter</span>();
+        <span class="ty">String</span> name = request.<span class="fn">getParameter</span>(<span class="str">"name"</span>);
+        <span class="ty">String</span> rollno = request.<span class="fn">getParameter</span>(<span class="str">"rollno"</span>);
+        <span class="ty">String</span> dept = request.<span class="fn">getParameter</span>(<span class="str">"dept"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;h2&gt;Student Details&lt;/h2&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Name:&lt;/b&gt; "</span> + name + <span class="str">"&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Roll No:&lt;/b&gt; "</span> + rollno + <span class="str">"&lt;/p&gt;"</span>);
+        out.<span class="fn">println</span>(<span class="str">"&lt;p&gt;&lt;b&gt;Department:&lt;/b&gt; "</span> + dept + <span class="str">"&lt;/p&gt;"</span>);
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULT ANALYSIS -->
+        <section class="content-section" id="result-analysis">
+          <h2 class="content-section-title"><span class="section-icon">📊</span> 10. Result Analysis &amp; Discussion</h2>
+          <div class="analysis-grid">
+            <div class="analysis-card">
+              <div class="analysis-card-title">🔍 Servlet Dispatch Pipeline &amp; Thread Safety</div>
+              <p>Tomcat instantiates only a single servlet instance per registered class in memory, spawning lightweight worker threads per incoming HTTP socket. Because instance variables are shared across concurrent requests, servlets must remain strictly stateless to guarantee thread safety.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">⚡ GenericServlet vs HttpServlet Routing Overhead</div>
+              <p><code>HttpServlet.service()</code> inspects <code>request.getMethod()</code> to dynamically route traffic to <code>doGet()</code>, <code>doPost()</code>, <code>doPut()</code>, or <code>doDelete()</code>. GenericServlet avoids HTTP header parsing, delivering minimal overhead for raw socket stream protocols.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">🛡️ HTTP GET vs POST Payload Security</div>
+              <p>GET requests append form data into plaintext URL query strings subject to server access log leakage and browser history exposure. POST packages form bodies into HTTP message payloads, enabling transmission of large payloads without URI length limits.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">💡 Lifecycle Hooks &amp; Resource Teardown</div>
+              <p><code>init()</code> executes exactly once during servlet class loading (or eagerly via <code>&lt;load-on-startup&gt;</code>) to initialize database connection pools. <code>destroy()</code> triggers during server shutdown to gracefully flush caches and close open file descriptors.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 16 AUTHENTIC SCREENSHOTS GALLERY -->
+        <section class="content-section" id="screenshots">
+          <div class="gallery-section-header">
+            <h2 class="content-section-title mb-0" style="border-bottom:none;padding-bottom:0">
+              <span class="section-icon">🖼️</span> 11. Authentic Laboratory Execution Screenshot Gallery (16 Figures)
+            </h2>
+            <span class="badge badge-purple">16 Authentic Student Screenshots</span>
+          </div>
+          <p>
+            All 16 high-resolution screenshots captured directly from NetBeans IDE 8.2 and browser execution environments:
+          </p>
+
+          <div class="gallery-grid">
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.1</span><span class="ss-counter-badge">[1 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.1: NetBeans WebApplication8 Setup"><img src="../assets/images/week-7/w7_web_app_setup.png" alt="Figure 7.1" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">WebApplication8 Project Structure</div><div class="ss-subcaption">NetBeans IDE 8.2 showing project tree, Web Pages, WEB-INF, and index.html.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.2</span><span class="ss-counter-badge">[2 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.2: NewServlet Code (24EU08145)"><img src="../assets/images/week-7/w7_newservlet_code_24EU08145.png" alt="Figure 7.2" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">NewServlet.java Code (24EU08145)</div><div class="ss-subcaption">NetBeans editor displaying processRequest() writing Roll Number: 24EU08145.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.3</span><span class="ss-counter-badge">[3 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.3: NewServlet Browser View (24EU08145)"><img src="../assets/images/week-7/w7_newservlet_browser_24EU08145.png" alt="Figure 7.3" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">NewServlet Browser View (24EU08145)</div><div class="ss-subcaption">Browser rendering ADVANCED JAVA LAB, STUDENT DETAILS with Roll Number: 24EU08145.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.4</span><span class="ss-counter-badge">[4 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.4: NewServlet IDE Workspace"><img src="../assets/images/week-7/w7_newservlet_netbeans_ide.jpg" alt="Figure 7.4" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">NewServlet IDE Workspace</div><div class="ss-subcaption">NetBeans IDE showing project navigator, compile status, and BUILD SUCCESSFUL.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.5</span><span class="ss-counter-badge">[5 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.5: NewServlet2 Code"><img src="../assets/images/week-7/w7_newservlet2_code.jpg" alt="Figure 7.5" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">NewServlet2.java Code Editor</div><div class="ss-subcaption">HttpServlet authoring Register Number: 24U08145 and ADV JAVA LAB header.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.6</span><span class="ss-counter-badge">[6 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.6: NewServlet2 Output"><img src="../assets/images/week-7/w7_newservlet2_browser.png" alt="Figure 7.6" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">NewServlet2 Browser Output</div><div class="ss-subcaption">Browser rendering HTTP Servlet, Student Details, and Register Number: 24U08145.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.7</span><span class="ss-counter-badge">[7 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.7: GetPostServlet Code"><img src="../assets/images/week-7/w7_get_post_servlet_code.png" alt="Figure 7.7" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">GetPostServlet.java Source Code</div><div class="ss-subcaption">NetBeans editor displaying @WebServlet("/GetPostServlet") with doGet() and doPost().</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.8</span><span class="ss-counter-badge">[8 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.8: HTML Form Markup for GET/POST"><img src="../assets/images/week-7/w7_get_post_html_form_code.png" alt="Figure 7.8" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">HTML Form Markup for GET/POST</div><div class="ss-subcaption">HTML form markup containing both GET and POST submission buttons to GetPostServlet.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.9</span><span class="ss-counter-badge">[9 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.9: Browser GET Request Execution"><img src="../assets/images/week-7/w7_get_request_output.png" alt="Figure 7.9" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Browser GET Request Execution</div><div class="ss-subcaption">Browser response showing "Hello pooja! This is a GET request."</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.10</span><span class="ss-counter-badge">[10 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.10: Browser POST Request Execution"><img src="../assets/images/week-7/w7_post_request_output.png" alt="Figure 7.10" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Browser POST Request Execution</div><div class="ss-subcaption">Browser response showing "Hello pooja! This is a POST request."</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.11</span><span class="ss-counter-badge">[11 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.11: MyGenericServlet Code"><img src="../assets/images/week-7/w7_generic_servlet_code.png" alt="Figure 7.11" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">MyGenericServlet.java Source Code</div><div class="ss-subcaption">GenericServletDemo project showing class extending GenericServlet with service() method.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.12</span><span class="ss-counter-badge">[12 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.12: Generic Servlet Output"><img src="../assets/images/week-7/w7_generic_servlet_output.png" alt="Figure 7.12" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Generic Servlet Browser View</div><div class="ss-subcaption">Browser rendering "This servlet extends GenericServlet. Hello from GenericServlet!"</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.13</span><span class="ss-counter-badge">[13 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.13: LifeCycleServlet Code"><img src="../assets/images/week-7/w7_lifecycle_servlet_code.png" alt="Figure 7.13" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">LifeCycleServlet.java Source Code</div><div class="ss-subcaption">Class implementing Servlet interface with init(), service(), and destroy() hooks.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.14</span><span class="ss-counter-badge">[14 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.14: Servlet Life Cycle Output"><img src="../assets/images/week-7/w7_lifecycle_servlet_output.png" alt="Figure 7.14" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Servlet Life Cycle Browser View</div><div class="ss-subcaption">Browser output demonstrating init(): Servlet Initialized, service(): Request Processed.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.15</span><span class="ss-counter-badge">[15 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.15: Student Registration Form Input"><img src="../assets/images/week-7/w7_student_form_browser_input.png" alt="Figure 7.15" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Student Registration Form Input</div><div class="ss-subcaption">Browser rendering form.html with entered details: Name: pooja, Roll No: 145, Dept: it.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 7.16</span><span class="ss-counter-badge">[16 / 16]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 7.16: Student Form Output"><img src="../assets/images/week-7/w7_student_form_browser_output.png" alt="Figure 7.16" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Submitted Student Record View</div><div class="ss-subcaption">StudentFormServlet browser response dynamically displaying Name: pooja, Roll No: 145, Dept: it.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="result">
+          <h2 class="content-section-title"><span class="section-icon">🏁</span> 12. Conclusion</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✔</span> Deployed modular Java Web Applications on Apache Tomcat Server in NetBeans IDE 8.2.</div>
+            <div class="outcome-item"><span class="check">✔</span> Verified <code>HttpServlet</code> (NewServlet) rendering candidate Roll Number <strong>24EU08145</strong>.</div>
+            <div class="outcome-item"><span class="check">✔</span> Validated dual GET &amp; POST request dispatching with query parameter extraction.</div>
+            <div class="outcome-item"><span class="check">✔</span> Overrode <code>service()</code> in protocol-independent <code>GenericServlet</code>.</div>
+            <div class="outcome-item"><span class="check">✔</span> Profiled the 3-phase Servlet Lifecycle (<code>init()</code>, <code>service()</code>, <code>destroy()</code>).</div>
+            <div class="outcome-item"><span class="check">✔</span> Documented all 16 authentic figures including candidate form submission (<strong>pooja</strong>, <strong>145</strong>).</div>
+          </div>
+        </section>
+
+    </main>
+  </div>
+
+  <!-- IMAGE ZOOM LIGHTBOX MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-label="Screenshot Preview">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Preview" title="Close (Esc)">&times;</button>
+      <img src="" alt="Screenshot Preview" class="modal-img" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background:#1E1B18;color:#DDD5C8;padding:40px 24px 28px;border-top:2px solid #542B36;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:800;color:#FFFEFA;font-size:1.05rem;letter-spacing:0.04em;">Advanced Java Programming Lab Record (24IT385) · Technical Field Journal</div>
+        <div style="font-size:0.84rem;margin-top:4px;">CHINNATHAMBI NARAYANAN POOJA CHANDRAN · Roll Number: <strong style="color:#C58A45;">24EU08145</strong> · Department of Information Technology</div>
+        <div style="font-size:0.78rem;color:#A39D95;">Siddhartha Academy of Higher Education · Academic Year 2026–2027</div>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <a href="../../24EU08145.html" class="btn btn-secondary btn-sm" style="color:#FFFEFA;border-color:#542B36;background:#542B36;">🏠 Home Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

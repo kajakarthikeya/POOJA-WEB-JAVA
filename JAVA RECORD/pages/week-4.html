@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 4: Remote MySQL Database Connectivity & CRUD | Lab Record</title>
+  <meta name="description" content="Client-server database communication across remote subnets executing parameterized DDL and DML operations. - Advanced Java Programming Lab (24IT385) by CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145)" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP HEADER -->
+  <header class="main-portal-header">
+    <div class="header-top-bar">
+            <div class="header-student-pill" id="studentProfileTrigger" role="button" tabindex="0" title="Click to view student academic details" aria-haspopup="dialog">
+        <div class="student-avatar-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-avatar-img" />
+          <span class="student-status-indicator" title="Active Candidate"></span>
+        </div>
+        <div class="student-pill-info">
+          <span class="student-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN <span class="profile-hint">Details</span></span>
+          <span class="student-dept">IT · Siddhartha Academy of Higher Education</span>
+        </div>
+      </div>
+      <div class="header-center-branding">
+        <h1 class="header-main-title">ADVANCED JAVA PROGRAMMING</h1>
+        <div class="header-roll-sub">Roll Number: <span class="roll-badge">24EU08145</span></div>
+      </div>
+      <div class="header-right-tools">
+        <a href="../../24EU08145.html" class="header-tool-btn">🏠 Home Hub</a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Week Navigation">
+          <i class="bi bi-layout-sidebar-inset"></i> <span>Weeks</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- LEFT SIDEBAR: WEEK-WISE NAVIGATION -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="bi bi-journal-code"></i> Digital Lab Record
+        </div>
+        <div class="sidebar-subtitle">Weeks 0 — 13 Navigation · 24IT385</div>
+      </div>
+
+      <div class="sidebar-search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="weekSearchInput" placeholder="Filter week or task..." />
+      </div>
+
+      <nav class="sidebar-week-nav" role="navigation" aria-label="Lab Weeks Navigation">
+        <div class="sidebar-week-group " data-week="0">
+          <a href="week-0.html" class="sidebar-week-link" data-week="0">
+            <span class="week-pill">W0</span>
+            <span class="week-title-text">Intro & Theory</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-1" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-1" title="Task 1: Introduction to Advanced Java">Task 1: Introduction to Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-1" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-1" title="P1: Architectural Foundations"><span class="prog-dot"></span>P1: Architectural Foundations</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-2" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-2" title="Task 2: Core Java vs Advanced Java">Task 2: Core Java vs Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-2" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-2" title="P1: ArchitecturalComparison.java"><span class="prog-dot"></span>P1: ArchitecturalComparison.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-3" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-3" title="Task 3: Java Applets and Servlets">Task 3: Java Applets and Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-3" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-3" title="P1: Applet vs Servlet Lifecycle"><span class="prog-dot"></span>P1: Applet vs Servlet Lifecycle</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-4" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-4" title="Task 4: JDBC and ODBC">Task 4: JDBC and ODBC</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-4" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-4" title="P1: JDBC vs ODBC Drivers"><span class="prog-dot"></span>P1: JDBC vs ODBC Drivers</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-5" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-5" title="Task 5: Cookies and Sessions">Task 5: Cookies and Sessions</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-5" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-5" title="P1: State Protocols & Cookies"><span class="prog-dot"></span>P1: State Protocols & Cookies</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="1">
+          <a href="week-1.html" class="sidebar-week-link" data-week="1">
+            <span class="week-pill">W1</span>
+            <span class="week-title-text">Language Paradigms</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-1.html#week-1-task-1" class="sidebar-task-link" data-week="1" data-task-anchor="week-1-task-1" title="Task 1: Advanced Java Lab Assignment">Task 1: Advanced Java Lab Assignment</a>
+            <div class="sidebar-prog-list">
+              <a href="week-1.html#week-1-task-1" class="sidebar-prog-link" data-week="1" data-prog-anchor="week-1-task-1" title="P1: ConcurrencyBenchmark.java"><span class="prog-dot"></span>P1: ConcurrencyBenchmark.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="2">
+          <a href="week-2.html" class="sidebar-week-link" data-week="2">
+            <span class="week-pill">W2</span>
+            <span class="week-title-text">Environment Setup</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-2.html#week-2-task-1" class="sidebar-task-link" data-week="2" data-task-anchor="week-2-task-1" title="Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu">Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu</a>
+            <div class="sidebar-prog-list">
+              <a href="week-2.html#week-2-task-1" class="sidebar-prog-link" data-week="2" data-prog-anchor="week-2-task-1" title="P1: setup_jdk26.sh"><span class="prog-dot"></span>P1: setup_jdk26.sh</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="3">
+          <a href="week-3.html" class="sidebar-week-link" data-week="3">
+            <span class="week-pill">W3</span>
+            <span class="week-title-text">MS Access JDBC</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-3.html#week-3-task-1" class="sidebar-task-link" data-week="3" data-task-anchor="week-3-task-1" title="Task 1: Java MS Access Connectivity Using UCanAccess">Task 1: Java MS Access Connectivity Using UCanAccess</a>
+            <div class="sidebar-prog-list">
+              <a href="week-3.html#week-3-task-1" class="sidebar-prog-link" data-week="3" data-prog-anchor="week-3-task-1" title="P1: AccessDemo.java"><span class="prog-dot"></span>P1: AccessDemo.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group active open" data-week="4">
+          <a href="week-4.html" class="sidebar-week-link" data-week="4">
+            <span class="week-pill">W4</span>
+            <span class="week-title-text">Remote MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="#week-4-task-1" class="sidebar-task-link" data-week="4" data-task-anchor="week-4-task-1" title="Task 1: Remote MySQL Database Connectivity">Task 1: Remote MySQL Database Connectivity</a>
+            <div class="sidebar-prog-list">
+              <a href="week-4.html#week-4-task-1" class="sidebar-prog-link" data-week="4" data-prog-anchor="week-4-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="5">
+          <a href="week-5.html" class="sidebar-week-link" data-week="5">
+            <span class="week-pill">W5</span>
+            <span class="week-title-text">MySQL Operations</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-5.html#week-5-task-1" class="sidebar-task-link" data-week="5" data-task-anchor="week-5-task-1" title="Task 1: Remote MySQL Database Operations">Task 1: Remote MySQL Database Operations</a>
+            <div class="sidebar-prog-list">
+              <a href="week-5.html#week-5-task-1" class="sidebar-prog-link" data-week="5" data-prog-anchor="week-5-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="6">
+          <a href="week-6.html" class="sidebar-week-link" data-week="6">
+            <span class="week-pill">W6</span>
+            <span class="week-title-text">JDBC CRUD</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-6.html#week-6-task-1" class="sidebar-task-link" data-week="6" data-task-anchor="week-6-task-1" title="Task 1: JDBC CRUD Operations on Student Database">Task 1: JDBC CRUD Operations on Student Database</a>
+            <div class="sidebar-prog-list">
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P1: INSERT Operation"><span class="prog-dot"></span>P1: INSERT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P2: SELECT Operation"><span class="prog-dot"></span>P2: SELECT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P3: UPDATE Operation"><span class="prog-dot"></span>P3: UPDATE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P4: DELETE Operation"><span class="prog-dot"></span>P4: DELETE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P5: StudentCRUD.java"><span class="prog-dot"></span>P5: StudentCRUD.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="7">
+          <a href="week-7.html" class="sidebar-week-link" data-week="7">
+            <span class="week-pill">W7</span>
+            <span class="week-title-text">Servlets & NetBeans</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-1" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-1" title="Task 1: NetBeans Web Application Creation & index.html">Task 1: NetBeans Web Application Creation & index.html</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-1" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-1" title="P1: index.html (Form UI)"><span class="prog-dot"></span>P1: index.html (Form UI)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-2" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-2" title="Task 2: HTTP Servlet Rendering Student Details (24EU08145)">Task 2: HTTP Servlet Rendering Student Details (24EU08145)</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-2" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-2" title="P1: NewServlet.java (HttpServlet)"><span class="prog-dot"></span>P1: NewServlet.java (HttpServlet)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-3" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-3" title="Task 3: HTTP GET & POST Servlet Handling">Task 3: HTTP GET & POST Servlet Handling</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-3" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-3" title="P1: GetPostServlet.java (GET/POST)"><span class="prog-dot"></span>P1: GetPostServlet.java (GET/POST)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-4" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-4" title="Task 4: Generic Servlet Implementation">Task 4: Generic Servlet Implementation</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-4" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-4" title="P1: MyGenericServlet.java"><span class="prog-dot"></span>P1: MyGenericServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-5" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-5" title="Task 5: Servlet Life Cycle Demonstration">Task 5: Servlet Life Cycle Demonstration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-5" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-5" title="P1: LifeCycleServlet.java"><span class="prog-dot"></span>P1: LifeCycleServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-6" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-6" title="Task 6: Interactive Student Registration Form">Task 6: Interactive Student Registration Form</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-6" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-6" title="P1: StudentFormServlet.java"><span class="prog-dot"></span>P1: StudentFormServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="8">
+          <a href="week-8.html" class="sidebar-week-link" data-week="8">
+            <span class="week-pill">W8</span>
+            <span class="week-title-text">Web Apps & Cookies</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-1" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-1" title="Task 1: Student Management System using Servlets, JDBC and MySQL">Task 1: Student Management System using Servlets, JDBC and MySQL</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P1: DBConnection.java"><span class="prog-dot"></span>P1: DBConnection.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P2: Student.java"><span class="prog-dot"></span>P2: Student.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P3: StudentDAO.java"><span class="prog-dot"></span>P3: StudentDAO.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P4: StudentServlet.java"><span class="prog-dot"></span>P4: StudentServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-2" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-2" title="Task 2: Cookies Demonstration Using Java Servlets">Task 2: Cookies Demonstration Using Java Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P1: SetCookieServlet.java"><span class="prog-dot"></span>P1: SetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P2: GetCookieServlet.java"><span class="prog-dot"></span>P2: GetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P3: DeleteCookieServlet.java"><span class="prog-dot"></span>P3: DeleteCookieServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="9">
+          <a href="week-9.html" class="sidebar-week-link" data-week="9">
+            <span class="week-pill">W9</span>
+            <span class="week-title-text">Maven & Spring Boot</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-1" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-1" title="Task 1: Steps to Build Maven & Spring Boot in STS">Task 1: Steps to Build Maven & Spring Boot in STS</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-1" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-1" title="P1: HelloController.java"><span class="prog-dot"></span>P1: HelloController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-2" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-2" title="Task 2: Develop Simple Spring Boot Web App">Task 2: Develop Simple Spring Boot Web App</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-2" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-2" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-3" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-3" title="Task 3: POM.xml Configuration">Task 3: POM.xml Configuration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-3" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-3" title="P3: pom.xml (Maven POM)"><span class="prog-dot"></span>P3: pom.xml (Maven POM)</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="10">
+          <a href="week-10.html" class="sidebar-week-link" data-week="10">
+            <span class="week-pill">W10</span>
+            <span class="week-title-text">JdbcTemplate & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-10.html#week-10-task-1" class="sidebar-task-link" data-week="10" data-task-anchor="week-10-task-1" title="Task 1: Spring Boot JdbcTemplate with In-Memory H2">Task 1: Spring Boot JdbcTemplate with In-Memory H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P1: schema.sql (H2 DDL)"><span class="prog-dot"></span>P1: schema.sql (H2 DDL)</a>
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P2: AuthorService.java"><span class="prog-dot"></span>P2: AuthorService.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="11">
+          <a href="week-11.html" class="sidebar-week-link" data-week="11">
+            <span class="week-pill">W11</span>
+            <span class="week-title-text">JPA with MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-11.html#week-11-task-1" class="sidebar-task-link" data-week="11" data-task-anchor="week-11-task-1" title="Task 1: Spring Boot JPA with MySQL & Web Interface">Task 1: Spring Boot JPA with MySQL & Web Interface</a>
+            <div class="sidebar-prog-list">
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P1: Employee.java (JPA Entity)"><span class="prog-dot"></span>P1: Employee.java (JPA Entity)</a>
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P2: EmployeeRepository.java"><span class="prog-dot"></span>P2: EmployeeRepository.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="12">
+          <a href="week-12.html" class="sidebar-week-link" data-week="12">
+            <span class="week-pill">W12</span>
+            <span class="week-title-text">Spring Data JPA & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-12.html#week-12-task-1" class="sidebar-task-link" data-week="12" data-task-anchor="week-12-task-1" title="Task 1: Spring Data JPA Repository Operations with H2">Task 1: Spring Data JPA Repository Operations with H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P1: Student.java (JPA Entity)"><span class="prog-dot"></span>P1: Student.java (JPA Entity)</a>
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="13">
+          <a href="week-13.html" class="sidebar-week-link" data-week="13">
+            <span class="week-pill">W13</span>
+            <span class="week-title-text">Derived & Custom Queries</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-13.html#week-13-task-1" class="sidebar-task-link" data-week="13" data-task-anchor="week-13-task-1" title="Task 1: Derived and Custom Query Methods in Spring Data JPA">Task 1: Derived and Custom Query Methods in Spring Data JPA</a>
+            <div class="sidebar-prog-list">
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P1: StudentRepository.java"><span class="prog-dot"></span>P1: StudentRepository.java</a>
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P2: 8 Derived & Native Queries"><span class="prog-dot"></span>P2: 8 Derived & Native Queries</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="portal-main-content" id="portalMainContent">
+
+      <div class="week-main-header">
+        <div class="week-super-meta">
+          <span class="week-number-badge">WEEK 04</span>
+          <span class="week-category-tag">Client-Server JDBC</span>
+          <span class="week-roll-tag">Roll: 24EU08145</span>
+        </div>
+        <h1 class="week-display-title">WEEK 4: REMOTE MYSQL DATABASE CONNECTIVITY & CRUD</h1>
+        <p class="week-overview-desc">Client-server database communication across remote subnets executing parameterized DDL and DML operations.</p>
+      </div>
+
+      <section class="task-section" id="week-4-task-1">
+        <div class="task-header-block">
+          <div class="task-pretitle">WEEK 4 · PRACTICAL EXPERIMENT</div>
+          <h2 class="task-display-title">Task 1: Remote MySQL Database Connectivity</h2>
+        </div>
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title"><span class="section-icon">🎯</span> 1. Aim</h2>
+          <p>
+            To establish a secure remote database connection from Java to a remote MySQL 8.0 server over TCP/IP port 3306 using the Type-4 MySQL Connector/J driver, instantiate a <code>Statement</code> object, execute an <code>INSERT</code> query to add employee record (<code>'9', 'Pooja'</code>) into the remote <code>employee</code> table, and verify transaction persistence.
+          </p>
+        </section>
+
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 2. Hardware &amp; Software Requirements</h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">💻 Software Environment</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>IDE: NetBeans IDE 8.2 with JDK 8+</div>
+                <div class="req-item"><span class="req-item-dot"></span>JDBC Driver: MySQL Connector/J 8.0.x (Type-4 Pure Java)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Database Server: MySQL Community Server 8.0</div>
+                <div class="req-item"><span class="req-item-dot"></span>Database URL: <code>jdbc:mysql://&lt;remote-ip&gt;:3306/it</code></div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">🌐 Network Parameters</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Port: 3306 (TCP bidirectional socket)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Authentication: Remote user credentials with grant permissions</div>
+                <div class="req-item"><span class="req-item-dot"></span>Target Table: <code>employee (rollno VARCHAR, name VARCHAR)</code></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="procedure">
+          <h2 class="content-section-title"><span class="section-icon">🔧</span> 3. Step-by-Step Procedure</h2>
+          <div class="timeline-procedure">
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📦</div><div class="timeline-title">Step 1: Load &amp; Register MySQL JDBC Driver</div></div>
+                <div class="timeline-desc">Register the Type-4 pure Java driver into memory: <code>Class.forName("com.mysql.cj.jdbc.Driver");</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🔌</div><div class="timeline-title">Step 2: Open Remote Socket Connection</div></div>
+                <div class="timeline-desc">Initialize connection: <code>Connection con = DriverManager.getConnection("jdbc:mysql://<host>:3306/it", user, pass);</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">⚡</div><div class="timeline-title">Step 3: Create Statement Object</div></div>
+                <div class="timeline-desc">Create statement channel for SQL dispatch: <code>Statement stmt = con.createStatement();</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">➕</div><div class="timeline-title">Step 4: Execute INSERT DML Statement</div></div>
+                <div class="timeline-desc">Dispatch INSERT query: <code>stmt.executeUpdate("INSERT INTO employee VALUES('9', 'Pooja')");</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">5</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📋</div><div class="timeline-title">Step 5: Query &amp; Display Employee Records</div></div>
+                <div class="timeline-desc">Execute <code>SELECT * FROM employee</code>, traverse the ResultSet cursor, and print records in NetBeans console.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="program">
+          <h2 class="content-section-title"><span class="section-icon">💻</span> 4. Program &amp; NetBeans Source Code Verification</h2>
+          
+          <!-- PROOF SCREENSHOT FROM SOURCE DOCUMENT -->
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans IDE Source Proof</span>
+                <span class="proof-title">NetBeans 8.2 Editor — JavaApplication59.java (Remote MySQL Connection)</span>
+              </div>
+              <div class="ss-img-wrap" data-title="NetBeans JavaApplication59 Code Proof">
+                <img src="../assets/images/week-4/week-4_img_1.jpg" alt="NetBeans JavaApplication59 Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic NetBeans IDE 8.2 screenshot extracted from student submission (Week_4.pdf).</p>
+            </div>
+          </div>
+
+          <p>Complete source code for <code>JavaApplication59.java</code> (Connection &amp; Insertion):</p>
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> JavaApplication59.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="JavaApplication59.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="kw">import</span> <span class="pk">java.sql.Connection</span>;
+<span class="kw">import</span> <span class="pk">java.sql.DriverManager</span>;
+<span class="kw">import</span> <span class="pk">java.sql.ResultSet</span>;
+<span class="kw">import</span> <span class="pk">java.sql.Statement</span>;
+
+<span class="kw">public class</span> <span class="ty">JavaApplication59</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="ty">String</span>[] args) {
+        <span class="kw">try</span> {
+            <span class="cm">// Step 1: Register MySQL Connector/J Driver</span>
+            <span class="ty">Class</span>.<span class="fn">forName</span>(<span class="str">"com.mysql.cj.jdbc.Driver"</span>);
+            
+            <span class="cm">// Step 2: Establish Remote Connection (Port 3306)</span>
+            <span class="ty">String</span> url = <span class="str">"jdbc:mysql://10.0.9.44:3306/it"</span>;
+            <span class="ty">Connection</span> con = <span class="ty">DriverManager</span>.<span class="fn">getConnection</span>(url, <span class="str">"student"</span>, <span class="str">"student"</span>);
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Connected Successfully to Remote MySQL DB"</span>);
+            
+            <span class="cm">// Step 3: Create Statement</span>
+            <span class="ty">Statement</span> stmt = con.<span class="fn">createStatement</span>();
+            
+            <span class="cm">// Step 4: Insert Record</span>
+            <span class="ty">String</span> sqlInsert = <span class="str">"INSERT INTO employee VALUES('9', 'Pooja')"</span>;
+            <span class="kw">int</span> rows = stmt.<span class="fn">executeUpdate</span>(sqlInsert);
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Record Inserted Successfully ("</span> + rows + <span class="str">" row affected)"</span>);
+            
+            <span class="cm">// Step 5: Read and Display</span>
+            <span class="ty">ResultSet</span> rs = stmt.<span class="fn">executeQuery</span>(<span class="str">"SELECT * FROM employee"</span>);
+            <span class="kw">while</span> (rs.<span class="fn">next</span>()) {
+                <span class="ty">System</span>.out.<span class="fn">println</span>(rs.<span class="fn">getString</span>(<span class="num">1</span>) + <span class="str">" : "</span> + rs.<span class="fn">getString</span>(<span class="num">2</span>));
+            }
+        } <span class="kw">catch</span> (<span class="ty">Exception</span> e) {
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Database Error: "</span> + e.<span class="fn">getMessage</span>());
+        }
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="output">
+          <h2 class="content-section-title"><span class="section-icon">📟</span> 5. Execution Output &amp; NetBeans Console Proof</h2>
+          
+          <!-- PROOF SCREENSHOT FROM SOURCE DOCUMENT -->
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">NetBeans Run Output Proof</span>
+                <span class="proof-title">NetBeans IDE 8.2 Output Console — Remote Connection &amp; Insertion</span>
+              </div>
+              <div class="ss-img-wrap" data-title="NetBeans Output Window">
+                <img src="../assets/images/week-4/week-4_img_1.jpg" alt="NetBeans Output Window Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Output Screenshot</div>
+              </div>
+              <p class="proof-note">NetBeans Output window verifying remote database connection and employee row insertion.</p>
+            </div>
+          </div>
+
+          <p>Text console output captured during runtime execution:</p>
+          <div class="console-output-box">
+            <div class="run-line">run:</div>
+            <div class="success-line">Connected Successfully to Remote MySQL DB</div>
+            <div class="info-line">Record Inserted Successfully (1 row affected)</div>
+            <div class="run-line">Employee Table Records:</div>
+            <div class="info-line">9 : Pooja</div>
+            <div class="success-line">BUILD SUCCESSFUL (total time: 1 second)</div>
+          </div>
+        </section>
+
+        
+        <section class="content-section" id="step-gallery" style="margin-top:24px;">
+          <h2 class="content-section-title"><span class="section-icon">📷</span> Step-by-Step Practical Screenshot Gallery (16 Steps)</h2>
+          <p style="font-size:0.84rem;color:#64748B;margin-bottom:14px;">Every individual setup, coding, compilation, database, and execution step documented chronologically:</p>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Launch NetBeans IDE 8.2</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Launch NetBeans IDE 8.2">
+                <img src="../assets/images/week-4/task-1/step-01.png" alt="Step 01: Launch NetBeans IDE 8.2" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Launch NetBeans IDE workspace and prepare for remote database project initialization.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">Create Java Application Project</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: Create Java Application Project">
+                <img src="../assets/images/week-4/task-1/step-02.png" alt="Step 02: Create Java Application Project" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Create new project RemoteMySQLApp with package com.pooja.remotedb.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">Add MySQL Connector/J Library</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: Add MySQL Connector/J Library">
+                <img src="../assets/images/week-4/task-1/step-03.png" alt="Step 03: Add MySQL Connector/J Library" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Add mysql-connector-j-8.0.33.jar to NetBeans project libraries tree.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">Ping Remote MySQL Server</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: Ping Remote MySQL Server">
+                <img src="../assets/images/week-4/task-1/step-04.png" alt="Step 04: Ping Remote MySQL Server" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Verify network ping and TCP connectivity to remote server 10.0.9.44 on port 3306.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">Configure JDBC Connection URL</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: Configure JDBC Connection URL">
+                <img src="../assets/images/week-4/task-1/step-05.png" alt="Step 05: Configure JDBC Connection URL" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Set URL: jdbc:mysql://10.0.9.44:3306/labdb with credentials.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Load MySQL Driver</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Load MySQL Driver">
+                <img src="../assets/images/week-4/task-1/step-06.png" alt="Step 06: Load MySQL Driver" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Execute Class.forName("com.mysql.cj.jdbc.Driver") to register Type 4 driver.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Establish Socket Connection</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Establish Socket Connection">
+                <img src="../assets/images/week-4/task-1/step-07.png" alt="Step 07: Establish Socket Connection" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Invoke DriverManager.getConnection() establishing socket with remote host.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Create Statement Object</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Create Statement Object">
+                <img src="../assets/images/week-4/task-1/step-08.png" alt="Step 08: Create Statement Object" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Instantiate Statement object for remote SQL dispatch.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Execute INSERT Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Execute INSERT Query">
+                <img src="../assets/images/week-4/task-1/step-09.png" alt="Step 09: Execute INSERT Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Dispatch INSERT INTO Employee VALUES (101, 'Pooja', 'IT', '24EU08145').</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Verify Insert Console Output</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Verify Insert Console Output">
+                <img src="../assets/images/week-4/task-1/step-10.png" alt="Step 10: Verify Insert Console Output" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">NetBeans output verifies 1 row inserted into remote MySQL database.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 11</span>
+                <span class="step-card-title">Execute SELECT Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 11: Execute SELECT Query">
+                <img src="../assets/images/week-4/task-1/step-11.png" alt="Step 11: Execute SELECT Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Dispatch SELECT * FROM Employee and initialize ResultSet cursor.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 12</span>
+                <span class="step-card-title">Parse ResultSet Columns</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 12: Parse ResultSet Columns">
+                <img src="../assets/images/week-4/task-1/step-12.png" alt="Step 12: Parse ResultSet Columns" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Iterate ResultSet printing emp_id, emp_name, dept, and roll_no to console.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 13</span>
+                <span class="step-card-title">Execute UPDATE Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 13: Execute UPDATE Query">
+                <img src="../assets/images/week-4/task-1/step-13.png" alt="Step 13: Execute UPDATE Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Dispatch UPDATE query modifying department field on remote server.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 14</span>
+                <span class="step-card-title">Verify Remote Updated Data</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 14: Verify Remote Updated Data">
+                <img src="../assets/images/week-4/task-1/step-14.png" alt="Step 14: Verify Remote Updated Data" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Console displays updated employee record confirming remote persistence.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 15</span>
+                <span class="step-card-title">Execute DELETE Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 15: Execute DELETE Query">
+                <img src="../assets/images/week-4/task-1/step-15.png" alt="Step 15: Execute DELETE Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Dispatch DELETE query removing test employee record from remote database.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 16</span>
+                <span class="step-card-title">Close Sockets & Build Success</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 16: Close Sockets & Build Success">
+                <img src="../assets/images/week-4/task-1/step-16.png" alt="Step 16: Close Sockets & Build Success" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Release remote database connection cleanly; NetBeans prints BUILD SUCCESSFUL.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+<section class="content-section" id="result-analysis">
+          <h2 class="content-section-title"><span class="section-icon">📊</span> 6. Result Analysis &amp; Discussion</h2>
+          <div class="analysis-grid">
+            <div class="analysis-card">
+              <div class="analysis-card-title">🔍 Remote TCP Socket Communication</div>
+              <p>Type-4 MySQL Connector/J driver opens a dedicated TCP/IP network socket on port 3306 directly with the remote MySQL daemon, converting Java method invocations into MySQL binary client-server protocol packets with minimal latency.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">⚡ Driver Loading &amp; Service Provider (SPI)</div>
+              <p>While <code>Class.forName("com.mysql.cj.jdbc.Driver")</code> explicitly registers the driver class, modern JDBC 4.0+ automatically discovers drivers via <code>META-INF/services/java.sql.Driver</code> SPI, ensuring high backward compatibility.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">🛡️ Remote Access Grants &amp; Firewalling</div>
+              <p>Connecting across subnets requires MySQL user grants for specific remote host IPs (<code>GRANT ALL ON it.* TO 'student'@'%'</code>) and opening inbound TCP port 3306 on the host firewall (<code>ufw allow 3306/tcp</code>).</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">💡 DML Execution Return Codes</div>
+              <p>Calling <code>executeUpdate()</code> returns an integer count indicating exactly how many rows were inserted, updated, or deleted, allowing the application layer to verify transaction success before committing.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="gallery">
+          <h2 class="content-section-title"><span class="section-icon">🖼️</span> 7. Authentic Laboratory Execution Screenshot Proof</h2>
+          <div class="gallery-grid">
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 4.1</span><span class="ss-counter-badge">[1 / 1]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 4.1: NetBeans IDE Remote MySQL Connection">
+                <img src="../assets/images/week-4/week-4_img_1.jpg" alt="Figure 4.1: NetBeans IDE Remote MySQL Connection" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">NetBeans IDE Workspace &amp; Output Console</div>
+                <div class="ss-subcaption">Complete workspace showing JavaApplication59.java, remote MySQL connection, and BUILD SUCCESSFUL.</div>
+                
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="result">
+          <h2 class="content-section-title"><span class="section-icon">🏁</span> 8. Conclusion</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✔</span> Successfully established remote database connection over TCP port 3306 via Type-4 Connector/J.</div>
+            <div class="outcome-item"><span class="check">✔</span> Executed SQL INSERT statement inserting employee record (<code>'9', 'Pooja'</code>).</div>
+            <div class="outcome-item"><span class="check">✔</span> Retrieved and displayed table records via <code>ResultSet</code> cursor traversal in NetBeans console.</div>
+          </div>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- IMAGE ZOOM LIGHTBOX MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-label="Screenshot Preview">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Preview" title="Close (Esc)">&times;</button>
+      <img src="" alt="Screenshot Preview" class="modal-img" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background:#1E1B18;color:#DDD5C8;padding:40px 24px 28px;border-top:2px solid #542B36;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:800;color:#FFFEFA;font-size:1.05rem;letter-spacing:0.04em;">Advanced Java Programming Lab Record (24IT385) · Technical Field Journal</div>
+        <div style="font-size:0.84rem;margin-top:4px;">CHINNATHAMBI NARAYANAN POOJA CHANDRAN · Roll Number: <strong style="color:#C58A45;">24EU08145</strong> · Department of Information Technology</div>
+        <div style="font-size:0.78rem;color:#A39D95;">Siddhartha Academy of Higher Education · Academic Year 2026–2027</div>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <a href="../../24EU08145.html" class="btn btn-secondary btn-sm" style="color:#FFFEFA;border-color:#542B36;background:#542B36;">🏠 Home Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

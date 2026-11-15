@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 9: Maven & Spring Boot Application Development in STS | Lab Record</title>
+  <meta name="description" content="Spring Starter Project wizard, dependency resolution via POM.xml, embedded Tomcat orchestration, and Maven lifecycle management. - Advanced Java Programming Lab (24IT385) by CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145)" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP HEADER -->
+  <header class="main-portal-header">
+    <div class="header-top-bar">
+            <div class="header-student-pill" id="studentProfileTrigger" role="button" tabindex="0" title="Click to view student academic details" aria-haspopup="dialog">
+        <div class="student-avatar-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-avatar-img" />
+          <span class="student-status-indicator" title="Active Candidate"></span>
+        </div>
+        <div class="student-pill-info">
+          <span class="student-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN <span class="profile-hint">Details</span></span>
+          <span class="student-dept">IT · Siddhartha Academy of Higher Education</span>
+        </div>
+      </div>
+      <div class="header-center-branding">
+        <h1 class="header-main-title">ADVANCED JAVA PROGRAMMING</h1>
+        <div class="header-roll-sub">Roll Number: <span class="roll-badge">24EU08145</span></div>
+      </div>
+      <div class="header-right-tools">
+        <a href="../../24EU08145.html" class="header-tool-btn">🏠 Home Hub</a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Week Navigation">
+          <i class="bi bi-layout-sidebar-inset"></i> <span>Weeks</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- LEFT SIDEBAR: WEEK-WISE NAVIGATION -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="bi bi-journal-code"></i> Digital Lab Record
+        </div>
+        <div class="sidebar-subtitle">Weeks 0 — 13 Navigation · 24IT385</div>
+      </div>
+
+      <div class="sidebar-search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="weekSearchInput" placeholder="Filter week or task..." />
+      </div>
+
+      <nav class="sidebar-week-nav" role="navigation" aria-label="Lab Weeks Navigation">
+        <div class="sidebar-week-group " data-week="0">
+          <a href="week-0.html" class="sidebar-week-link" data-week="0">
+            <span class="week-pill">W0</span>
+            <span class="week-title-text">Intro & Theory</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-1" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-1" title="Task 1: Introduction to Advanced Java">Task 1: Introduction to Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-1" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-1" title="P1: Architectural Foundations"><span class="prog-dot"></span>P1: Architectural Foundations</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-2" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-2" title="Task 2: Core Java vs Advanced Java">Task 2: Core Java vs Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-2" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-2" title="P1: ArchitecturalComparison.java"><span class="prog-dot"></span>P1: ArchitecturalComparison.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-3" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-3" title="Task 3: Java Applets and Servlets">Task 3: Java Applets and Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-3" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-3" title="P1: Applet vs Servlet Lifecycle"><span class="prog-dot"></span>P1: Applet vs Servlet Lifecycle</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-4" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-4" title="Task 4: JDBC and ODBC">Task 4: JDBC and ODBC</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-4" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-4" title="P1: JDBC vs ODBC Drivers"><span class="prog-dot"></span>P1: JDBC vs ODBC Drivers</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-5" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-5" title="Task 5: Cookies and Sessions">Task 5: Cookies and Sessions</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-5" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-5" title="P1: State Protocols & Cookies"><span class="prog-dot"></span>P1: State Protocols & Cookies</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="1">
+          <a href="week-1.html" class="sidebar-week-link" data-week="1">
+            <span class="week-pill">W1</span>
+            <span class="week-title-text">Language Paradigms</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-1.html#week-1-task-1" class="sidebar-task-link" data-week="1" data-task-anchor="week-1-task-1" title="Task 1: Advanced Java Lab Assignment">Task 1: Advanced Java Lab Assignment</a>
+            <div class="sidebar-prog-list">
+              <a href="week-1.html#week-1-task-1" class="sidebar-prog-link" data-week="1" data-prog-anchor="week-1-task-1" title="P1: ConcurrencyBenchmark.java"><span class="prog-dot"></span>P1: ConcurrencyBenchmark.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="2">
+          <a href="week-2.html" class="sidebar-week-link" data-week="2">
+            <span class="week-pill">W2</span>
+            <span class="week-title-text">Environment Setup</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-2.html#week-2-task-1" class="sidebar-task-link" data-week="2" data-task-anchor="week-2-task-1" title="Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu">Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu</a>
+            <div class="sidebar-prog-list">
+              <a href="week-2.html#week-2-task-1" class="sidebar-prog-link" data-week="2" data-prog-anchor="week-2-task-1" title="P1: setup_jdk26.sh"><span class="prog-dot"></span>P1: setup_jdk26.sh</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="3">
+          <a href="week-3.html" class="sidebar-week-link" data-week="3">
+            <span class="week-pill">W3</span>
+            <span class="week-title-text">MS Access JDBC</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-3.html#week-3-task-1" class="sidebar-task-link" data-week="3" data-task-anchor="week-3-task-1" title="Task 1: Java MS Access Connectivity Using UCanAccess">Task 1: Java MS Access Connectivity Using UCanAccess</a>
+            <div class="sidebar-prog-list">
+              <a href="week-3.html#week-3-task-1" class="sidebar-prog-link" data-week="3" data-prog-anchor="week-3-task-1" title="P1: AccessDemo.java"><span class="prog-dot"></span>P1: AccessDemo.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="4">
+          <a href="week-4.html" class="sidebar-week-link" data-week="4">
+            <span class="week-pill">W4</span>
+            <span class="week-title-text">Remote MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-4.html#week-4-task-1" class="sidebar-task-link" data-week="4" data-task-anchor="week-4-task-1" title="Task 1: Remote MySQL Database Connectivity">Task 1: Remote MySQL Database Connectivity</a>
+            <div class="sidebar-prog-list">
+              <a href="week-4.html#week-4-task-1" class="sidebar-prog-link" data-week="4" data-prog-anchor="week-4-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="5">
+          <a href="week-5.html" class="sidebar-week-link" data-week="5">
+            <span class="week-pill">W5</span>
+            <span class="week-title-text">MySQL Operations</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-5.html#week-5-task-1" class="sidebar-task-link" data-week="5" data-task-anchor="week-5-task-1" title="Task 1: Remote MySQL Database Operations">Task 1: Remote MySQL Database Operations</a>
+            <div class="sidebar-prog-list">
+              <a href="week-5.html#week-5-task-1" class="sidebar-prog-link" data-week="5" data-prog-anchor="week-5-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="6">
+          <a href="week-6.html" class="sidebar-week-link" data-week="6">
+            <span class="week-pill">W6</span>
+            <span class="week-title-text">JDBC CRUD</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-6.html#week-6-task-1" class="sidebar-task-link" data-week="6" data-task-anchor="week-6-task-1" title="Task 1: JDBC CRUD Operations on Student Database">Task 1: JDBC CRUD Operations on Student Database</a>
+            <div class="sidebar-prog-list">
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P1: INSERT Operation"><span class="prog-dot"></span>P1: INSERT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P2: SELECT Operation"><span class="prog-dot"></span>P2: SELECT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P3: UPDATE Operation"><span class="prog-dot"></span>P3: UPDATE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P4: DELETE Operation"><span class="prog-dot"></span>P4: DELETE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P5: StudentCRUD.java"><span class="prog-dot"></span>P5: StudentCRUD.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="7">
+          <a href="week-7.html" class="sidebar-week-link" data-week="7">
+            <span class="week-pill">W7</span>
+            <span class="week-title-text">Servlets & NetBeans</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-1" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-1" title="Task 1: NetBeans Web Application Creation & index.html">Task 1: NetBeans Web Application Creation & index.html</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-1" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-1" title="P1: index.html (Form UI)"><span class="prog-dot"></span>P1: index.html (Form UI)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-2" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-2" title="Task 2: HTTP Servlet Rendering Student Details (24EU08145)">Task 2: HTTP Servlet Rendering Student Details (24EU08145)</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-2" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-2" title="P1: NewServlet.java (HttpServlet)"><span class="prog-dot"></span>P1: NewServlet.java (HttpServlet)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-3" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-3" title="Task 3: HTTP GET & POST Servlet Handling">Task 3: HTTP GET & POST Servlet Handling</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-3" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-3" title="P1: GetPostServlet.java (GET/POST)"><span class="prog-dot"></span>P1: GetPostServlet.java (GET/POST)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-4" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-4" title="Task 4: Generic Servlet Implementation">Task 4: Generic Servlet Implementation</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-4" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-4" title="P1: MyGenericServlet.java"><span class="prog-dot"></span>P1: MyGenericServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-5" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-5" title="Task 5: Servlet Life Cycle Demonstration">Task 5: Servlet Life Cycle Demonstration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-5" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-5" title="P1: LifeCycleServlet.java"><span class="prog-dot"></span>P1: LifeCycleServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-6" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-6" title="Task 6: Interactive Student Registration Form">Task 6: Interactive Student Registration Form</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-6" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-6" title="P1: StudentFormServlet.java"><span class="prog-dot"></span>P1: StudentFormServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="8">
+          <a href="week-8.html" class="sidebar-week-link" data-week="8">
+            <span class="week-pill">W8</span>
+            <span class="week-title-text">Web Apps & Cookies</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-1" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-1" title="Task 1: Student Management System using Servlets, JDBC and MySQL">Task 1: Student Management System using Servlets, JDBC and MySQL</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P1: DBConnection.java"><span class="prog-dot"></span>P1: DBConnection.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P2: Student.java"><span class="prog-dot"></span>P2: Student.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P3: StudentDAO.java"><span class="prog-dot"></span>P3: StudentDAO.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P4: StudentServlet.java"><span class="prog-dot"></span>P4: StudentServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-2" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-2" title="Task 2: Cookies Demonstration Using Java Servlets">Task 2: Cookies Demonstration Using Java Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P1: SetCookieServlet.java"><span class="prog-dot"></span>P1: SetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P2: GetCookieServlet.java"><span class="prog-dot"></span>P2: GetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P3: DeleteCookieServlet.java"><span class="prog-dot"></span>P3: DeleteCookieServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group active open" data-week="9">
+          <a href="week-9.html" class="sidebar-week-link" data-week="9">
+            <span class="week-pill">W9</span>
+            <span class="week-title-text">Maven & Spring Boot</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="#week-9-task-1" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-1" title="Task 1: Steps to Build Maven & Spring Boot in STS">Task 1: Steps to Build Maven & Spring Boot in STS</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-1" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-1" title="P1: HelloController.java"><span class="prog-dot"></span>P1: HelloController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-9-task-2" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-2" title="Task 2: Develop Simple Spring Boot Web App">Task 2: Develop Simple Spring Boot Web App</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-2" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-2" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-9-task-3" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-3" title="Task 3: POM.xml Configuration">Task 3: POM.xml Configuration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-3" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-3" title="P3: pom.xml (Maven POM)"><span class="prog-dot"></span>P3: pom.xml (Maven POM)</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="10">
+          <a href="week-10.html" class="sidebar-week-link" data-week="10">
+            <span class="week-pill">W10</span>
+            <span class="week-title-text">JdbcTemplate & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-10.html#week-10-task-1" class="sidebar-task-link" data-week="10" data-task-anchor="week-10-task-1" title="Task 1: Spring Boot JdbcTemplate with In-Memory H2">Task 1: Spring Boot JdbcTemplate with In-Memory H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P1: schema.sql (H2 DDL)"><span class="prog-dot"></span>P1: schema.sql (H2 DDL)</a>
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P2: AuthorService.java"><span class="prog-dot"></span>P2: AuthorService.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="11">
+          <a href="week-11.html" class="sidebar-week-link" data-week="11">
+            <span class="week-pill">W11</span>
+            <span class="week-title-text">JPA with MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-11.html#week-11-task-1" class="sidebar-task-link" data-week="11" data-task-anchor="week-11-task-1" title="Task 1: Spring Boot JPA with MySQL & Web Interface">Task 1: Spring Boot JPA with MySQL & Web Interface</a>
+            <div class="sidebar-prog-list">
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P1: Employee.java (JPA Entity)"><span class="prog-dot"></span>P1: Employee.java (JPA Entity)</a>
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P2: EmployeeRepository.java"><span class="prog-dot"></span>P2: EmployeeRepository.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="12">
+          <a href="week-12.html" class="sidebar-week-link" data-week="12">
+            <span class="week-pill">W12</span>
+            <span class="week-title-text">Spring Data JPA & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-12.html#week-12-task-1" class="sidebar-task-link" data-week="12" data-task-anchor="week-12-task-1" title="Task 1: Spring Data JPA Repository Operations with H2">Task 1: Spring Data JPA Repository Operations with H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P1: Student.java (JPA Entity)"><span class="prog-dot"></span>P1: Student.java (JPA Entity)</a>
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="13">
+          <a href="week-13.html" class="sidebar-week-link" data-week="13">
+            <span class="week-pill">W13</span>
+            <span class="week-title-text">Derived & Custom Queries</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-13.html#week-13-task-1" class="sidebar-task-link" data-week="13" data-task-anchor="week-13-task-1" title="Task 1: Derived and Custom Query Methods in Spring Data JPA">Task 1: Derived and Custom Query Methods in Spring Data JPA</a>
+            <div class="sidebar-prog-list">
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P1: StudentRepository.java"><span class="prog-dot"></span>P1: StudentRepository.java</a>
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P2: 8 Derived & Native Queries"><span class="prog-dot"></span>P2: 8 Derived & Native Queries</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="portal-main-content" id="portalMainContent">
+
+      <div class="week-main-header">
+        <div class="week-super-meta">
+          <span class="week-number-badge">WEEK 09</span>
+          <span class="week-category-tag">Spring Boot & STS</span>
+          <span class="week-roll-tag">Roll: 24EU08145</span>
+        </div>
+        <h1 class="week-display-title">WEEK 9: MAVEN & SPRING BOOT APPLICATION DEVELOPMENT IN STS</h1>
+        <p class="week-overview-desc">Spring Starter Project wizard, dependency resolution via POM.xml, embedded Tomcat orchestration, and Maven lifecycle management.</p>
+      </div>
+
+      <section class="task-section" id="week-9-task-1">
+        <div class="task-header-block">
+          <div class="task-pretitle">ACTIVITY 1</div>
+          <h2 class="task-display-title">Task 1: Steps to Build Maven + Spring Boot Application in STS</h2>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h3 class="task-sub-title"><span class="sub-icon">📷</span> Step-by-Step Practical Gallery: Maven + Spring Boot Setup (15 Steps)</h3>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Launch Spring Tool Suite 4</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Launch Spring Tool Suite 4">
+                <img src="../assets/images/week-9/task-1/step-01.png" alt="Step 01: Launch Spring Tool Suite 4" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Open STS workspace configured with Java 17/21 runtime.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">New Spring Starter Project</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: New Spring Starter Project">
+                <img src="../assets/images/week-9/task-1/step-02.png" alt="Step 02: New Spring Starter Project" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Open Spring Starter Project wizard in STS.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">Configure Group & Artifact ID</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: Configure Group & Artifact ID">
+                <img src="../assets/images/week-9/task-1/step-03.png" alt="Step 03: Configure Group & Artifact ID" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Set Group: com.pooja, Artifact: spring-boot-demo, Packaging: Jar.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">Select Java Version</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: Select Java Version">
+                <img src="../assets/images/week-9/task-1/step-04.png" alt="Step 04: Select Java Version" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Configure Java version 17 and Spring Boot 3.x release.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">Select Spring Web Dependency</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: Select Spring Web Dependency">
+                <img src="../assets/images/week-9/task-1/step-05.png" alt="Step 05: Select Spring Web Dependency" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Select Spring Web dependency providing embedded Tomcat and REST support.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Inspect Project File Hierarchy</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Inspect Project File Hierarchy">
+                <img src="../assets/images/week-9/task-1/step-06.png" alt="Step 06: Inspect Project File Hierarchy" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">STS Package Explorer displays src/main/java and pom.xml.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Inspect Application Main Class</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Inspect Application Main Class">
+                <img src="../assets/images/week-9/task-1/step-07.png" alt="Step 07: Inspect Application Main Class" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Inspect SpringBootDemoApplication annotated with @SpringBootApplication.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Configure application.properties</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Configure application.properties">
+                <img src="../assets/images/week-9/task-1/step-08.png" alt="Step 08: Configure application.properties" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Set server.port=8080 and logging levels in application.properties.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Maven Update Project</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Maven Update Project">
+                <img src="../assets/images/week-9/task-1/step-09.png" alt="Step 09: Maven Update Project" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Execute Maven -> Update Project ensuring all dependencies resolved.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Run Maven Clean Install</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Run Maven Clean Install">
+                <img src="../assets/images/week-9/task-1/step-10.png" alt="Step 10: Run Maven Clean Install" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Execute Run As -> Maven clean install in STS.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 11</span>
+                <span class="step-card-title">Verify BUILD SUCCESS Console</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 11: Verify BUILD SUCCESS Console">
+                <img src="../assets/images/week-9/task-1/step-11.png" alt="Step 11: Verify BUILD SUCCESS Console" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">STS console prints Maven BUILD SUCCESS with 0 test failures.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 12</span>
+                <span class="step-card-title">Run as Spring Boot App</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 12: Run as Spring Boot App">
+                <img src="../assets/images/week-9/task-1/step-12.png" alt="Step 12: Run as Spring Boot App" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Execute Run As -> Spring Boot App from context menu.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 13</span>
+                <span class="step-card-title">Inspect Spring Boot Banner</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 13: Inspect Spring Boot Banner">
+                <img src="../assets/images/week-9/task-1/step-13.png" alt="Step 13: Inspect Spring Boot Banner" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Console displays ASCII Spring Boot banner and initialization logs.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 14</span>
+                <span class="step-card-title">Verify Tomcat Started on 8080</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 14: Verify Tomcat Started on 8080">
+                <img src="../assets/images/week-9/task-1/step-14.png" alt="Step 14: Verify Tomcat Started on 8080" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Console verifies Tomcat started on port 8080 (http) with context path '/'.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 15</span>
+                <span class="step-card-title">Browser Verification at localhost:8080</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 15: Browser Verification at localhost:8080">
+                <img src="../assets/images/week-9/task-1/step-15.png" alt="Step 15: Browser Verification at localhost:8080" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Open browser confirming application is live with HTTP 200 response.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="task-section" id="week-9-task-2">
+        <div class="task-header-block">
+          <div class="task-pretitle">ACTIVITY 2</div>
+          <h2 class="task-display-title">Task 2: Develop a Simple Spring Boot Web Application in STS</h2>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h3 class="task-sub-title"><span class="sub-icon">📷</span> Step-by-Step Practical Gallery: Web Controller Ingestion (12 Steps)</h3>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Create Web Controller Package</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Create Web Controller Package">
+                <img src="../assets/images/week-9/task-2/step-01.png" alt="Step 01: Create Web Controller Package" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Create package com.pooja.springbootdemo.controller.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">Author HelloController.java</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: Author HelloController.java">
+                <img src="../assets/images/week-9/task-2/step-02.png" alt="Step 02: Author HelloController.java" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Create class annotated with @RestController.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">Implement @GetMapping Method</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: Implement @GetMapping Method">
+                <img src="../assets/images/week-9/task-2/step-03.png" alt="Step 03: Implement @GetMapping Method" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Implement @GetMapping("/") returning personalized welcome message.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">Inject Roll Number 24EU08145</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: Inject Roll Number 24EU08145">
+                <img src="../assets/images/week-9/task-2/step-04.png" alt="Step 04: Inject Roll Number 24EU08145" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Return candidate identity string in HTTP response.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">Implement Parameterized Endpoint</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: Implement Parameterized Endpoint">
+                <img src="../assets/images/week-9/task-2/step-05.png" alt="Step 05: Implement Parameterized Endpoint" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Add @GetMapping("/greet") with @RequestParam name binding.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Save Source Files</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Save Source Files">
+                <img src="../assets/images/week-9/task-2/step-06.png" alt="Step 06: Save Source Files" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Save all modified controller classes in STS.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Spring DevTools Live Reload</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Spring DevTools Live Reload">
+                <img src="../assets/images/week-9/task-2/step-07.png" alt="Step 07: Spring DevTools Live Reload" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Automatic application reload via Spring DevTools module.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Test Root Endpoint in Browser</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Test Root Endpoint in Browser">
+                <img src="../assets/images/week-9/task-2/step-08.png" alt="Step 08: Test Root Endpoint in Browser" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Browser renders welcome message for CHINNATHAMBI NARAYANAN POOJA CHANDRAN.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Test Greet Endpoint with Query Param</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Test Greet Endpoint with Query Param">
+                <img src="../assets/images/week-9/task-2/step-09.png" alt="Step 09: Test Greet Endpoint with Query Param" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Browser test at localhost:8080/greet?name=Pooja.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Verify JSON Serialization</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Verify JSON Serialization">
+                <img src="../assets/images/week-9/task-2/step-10.png" alt="Step 10: Verify JSON Serialization" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Inspect Jackson JSON serialization for entity endpoints.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 11</span>
+                <span class="step-card-title">Inspect STS Access Logs</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 11: Inspect STS Access Logs">
+                <img src="../assets/images/week-9/task-2/step-11.png" alt="Step 11: Inspect STS Access Logs" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">STS console prints HTTP request dispatch and status 200 logs.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 12</span>
+                <span class="step-card-title">Final Web App Verification</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 12: Final Web App Verification">
+                <img src="../assets/images/week-9/task-2/step-12.png" alt="Step 12: Final Web App Verification" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Spring Boot web application successfully verified.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="task-section" id="week-9-task-3">
+        <div class="task-header-block">
+          <div class="task-pretitle">ACTIVITY 3</div>
+          <h2 class="task-display-title">Task 3: POM.xml Configuration and Dependency Management</h2>
+        </div>
+        <div style="margin-bottom:20px;">
+          <h3 class="task-sub-title"><span class="sub-icon">📷</span> Step-by-Step Practical Gallery: POM.xml Configuration (12 Steps)</h3>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Open POM.xml in STS</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Open POM.xml in STS">
+                <img src="../assets/images/week-9/task-3/step-01.png" alt="Step 01: Open POM.xml in STS" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Open project pom.xml in STS XML editor.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">Inspect Parent Starter POM</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: Inspect Parent Starter POM">
+                <img src="../assets/images/week-9/task-3/step-02.png" alt="Step 02: Inspect Parent Starter POM" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Verify spring-boot-starter-parent version and configuration inheritance.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">Inspect Project Coordinates</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: Inspect Project Coordinates">
+                <img src="../assets/images/week-9/task-3/step-03.png" alt="Step 03: Inspect Project Coordinates" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Review groupId, artifactId, and version tags.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">Inspect Java Version Property</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: Inspect Java Version Property">
+                <img src="../assets/images/week-9/task-3/step-04.png" alt="Step 04: Inspect Java Version Property" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Confirm <java.version>17</java.version> property.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">Inspect spring-boot-starter-web</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: Inspect spring-boot-starter-web">
+                <img src="../assets/images/week-9/task-3/step-05.png" alt="Step 05: Inspect spring-boot-starter-web" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Review web dependency bringing embedded Tomcat and Spring MVC.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Inspect spring-boot-starter-test</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Inspect spring-boot-starter-test">
+                <img src="../assets/images/week-9/task-3/step-06.png" alt="Step 06: Inspect spring-boot-starter-test" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Review test dependency scope for JUnit and Mockito.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Add Spring Boot Maven Plugin</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Add Spring Boot Maven Plugin">
+                <img src="../assets/images/week-9/task-3/step-07.png" alt="Step 07: Add Spring Boot Maven Plugin" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Configure spring-boot-maven-plugin for executable fat-JAR packaging.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Save POM.xml Changes</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Save POM.xml Changes">
+                <img src="../assets/images/week-9/task-3/step-08.png" alt="Step 08: Save POM.xml Changes" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Save POM configuration triggering Maven dependency resolution.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Inspect Maven Dependencies Tree</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Inspect Maven Dependencies Tree">
+                <img src="../assets/images/week-9/task-3/step-09.png" alt="Step 09: Inspect Maven Dependencies Tree" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Review resolved transitive dependencies in Package Explorer.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Execute Maven Build in STS</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Execute Maven Build in STS">
+                <img src="../assets/images/week-9/task-3/step-10.png" alt="Step 10: Execute Maven Build in STS" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Run Maven clean package to generate executable JAR archive.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 11</span>
+                <span class="step-card-title">Verify Generated JAR in target/</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 11: Verify Generated JAR in target/">
+                <img src="../assets/images/week-9/task-3/step-11.png" alt="Step 11: Verify Generated JAR in target/" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Confirm spring-boot-demo-0.0.1-SNAPSHOT.jar generated in target/.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 12</span>
+                <span class="step-card-title">Verify BUILD SUCCESS</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 12: Verify BUILD SUCCESS">
+                <img src="../assets/images/week-9/task-3/step-12.png" alt="Step 12: Verify BUILD SUCCESS" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Console verifies Maven BUILD SUCCESS and dependency tree completeness.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="task-section">
+        <div class="task-header-block">
+          <div class="task-pretitle">COMPLETE IMPLEMENTATION &amp; RESULT ANALYSIS</div>
+          <h2 class="task-display-title">STS Setup, Build Success &amp; Evaluation</h2>
+        </div>
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title"><span class="section-icon">🎯</span> 1. Aim</h2>
+          <p>
+            To construct, configure, and execute modular enterprise applications in <strong>Spring Tool Suite (STS 4)</strong> across three distinct laboratory activities:
+          </p>
+          <ul style="margin-left:24px;line-height:1.8;color:var(--text-sub);">
+            <li><strong>Activity 1:</strong> Initializing and executing a Maven archetype Spring Boot Web Application (<code>springmavendemo</code>) running on port 8080.</li>
+            <li><strong>Activity 2:</strong> Developing a domain-driven RESTful Web Application (<code>studentmanagement</code>) running on custom port 8081.</li>
+            <li><strong>Activity 3:</strong> Configuring a production-grade <code>pom.xml</code> declaring dependencies, parent starters, plugins, and verifying <code>mvn clean install BUILD SUCCESS</code>.</li>
+          </ul>
+        </section>
+
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 2. Software Requirements</h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">💻 Development Tooling</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>IDE: Spring Tool Suite 4 (STS 4.x Eclipse-based)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Build System: Apache Maven 3.8+</div>
+                <div class="req-item"><span class="req-item-dot"></span>JDK: Java SE Development Kit 17 / 21 LTS</div>
+                <div class="req-item"><span class="req-item-dot"></span>Framework: Spring Boot 3.x with spring-boot-starter-web</div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">🌐 Runtime &amp; Ports</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Web Container: Embedded Apache Tomcat</div>
+                <div class="req-item"><span class="req-item-dot"></span>Activity 1 Port: 8080 (http://localhost:8080/hello)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Activity 2 Port: 8081 (http://localhost:8081/students)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="procedure">
+          <h2 class="content-section-title"><span class="section-icon">🔧</span> 3. Step-by-Step Procedure</h2>
+          <div class="timeline-procedure">
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📁</div><div class="timeline-title">Step 1: Create Spring Starter Project in STS</div></div>
+                <div class="timeline-desc">File → New → Spring Starter Project. Enter Group ID (<code>com.example</code>), Artifact ID (<code>springmavendemo</code>), Java Version (17), and select Spring Web dependency.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">☕</div><div class="timeline-title">Step 2: Author REST Controller</div></div>
+                <div class="timeline-desc">Create <code>HelloController.java</code> annotated with <code>@RestController</code> and <code>@GetMapping("/hello")</code> returning greeting strings.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">📦</div><div class="timeline-title">Step 3: Maven Dependency Resolution &amp; Build</div></div>
+                <div class="timeline-desc">Configure <code>pom.xml</code>, execute Maven Update Project (Alt+F5), and run <code>clean install</code> verifying <code>BUILD SUCCESS</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🚀</div><div class="timeline-title">Step 4: Launch Application &amp; Browser Verification</div></div>
+                <div class="timeline-desc">Run as Spring Boot App, observe embedded Tomcat startup on port 8080/8081 in STS console, and query endpoints via browser.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 1 -->
+        <section class="content-section" id="activity-1">
+          <h2 class="content-section-title"><span class="section-icon">🍃</span> 4. Activity 1: Steps to Build Maven + Spring Boot Application in STS</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">STS IDE Source Proof</span>
+                <span class="proof-title">STS 4 Workspace — springmavendemo Project &amp; Controller Code</span>
+              </div>
+              <div class="ss-img-wrap" data-title="STS springmavendemo Code Proof">
+                <img src="../assets/images/week-9/maven_demo_step_2.png" alt="STS springmavendemo Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic STS 4 editor screenshot showing project hierarchy and HelloController.java.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Web Browser — http://localhost:8080/hello Output</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Browser springmavendemo Output Proof">
+                <img src="../assets/images/week-9/maven_demo_step_5.png" alt="Browser springmavendemo Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser execution proof showing Spring Boot REST response on port 8080.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> HelloController.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="HelloController.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="kw">package</span> <span class="pk">com.example.springmavendemo</span>;
+
+<span class="kw">import</span> <span class="pk">org.springframework.web.bind.annotation.GetMapping</span>;
+<span class="kw">import</span> <span class="pk">org.springframework.web.bind.annotation.RestController</span>;
+
+<span class="an">@RestController</span>
+<span class="kw">public class</span> <span class="ty">HelloController</span> {
+
+    <span class="an">@GetMapping</span>(<span class="str">"/hello"</span>)
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">sayHello</span>() {
+        <span class="kw">return</span> <span class="str">"Hello, Welcome to Spring Boot Application Built with Maven in STS!"</span>;
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 2 -->
+        <section class="content-section" id="activity-2">
+          <h2 class="content-section-title"><span class="section-icon">🎓</span> 5. Activity 2: Develop a Simple Spring Boot Web Application in STS</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">STS IDE Source Proof</span>
+                <span class="proof-title">STS 4 Workspace — studentmanagement Project &amp; Controller</span>
+              </div>
+              <div class="ss-img-wrap" data-title="STS studentmanagement Code Proof">
+                <img src="../assets/images/week-9/student_mgmt_step_2.png" alt="STS studentmanagement Code Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic STS 4 editor screenshot showing StudentController.java on port 8081.</p>
+            </div>
+
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Execution Output Proof</span>
+                <span class="proof-title">Web Browser — http://localhost:8081/students Output</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Browser studentmanagement Output Proof">
+                <img src="../assets/images/week-9/student_mgmt_step_5.png" alt="Browser studentmanagement Output Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser execution proof showing student details response on port 8081.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> StudentController.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="StudentController.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="kw">package</span> <span class="pk">com.example.studentmanagement</span>;
+
+<span class="kw">import</span> <span class="pk">org.springframework.web.bind.annotation.GetMapping</span>;
+<span class="kw">import</span> <span class="pk">org.springframework.web.bind.annotation.RestController</span>;
+
+<span class="an">@RestController</span>
+<span class="kw">public class</span> <span class="ty">StudentController</span> {
+
+    <span class="an">@GetMapping</span>(<span class="str">"/students"</span>)
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getStudentDetails</span>() {
+        <span class="kw">return</span> <span class="str">"Student Name: CHINNATHAMBI NARAYANAN POOJA CHANDRAN | Roll: 24EU08145 | Dept: IT"</span>;
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITY 3 -->
+        <section class="content-section" id="activity-3">
+          <h2 class="content-section-title"><span class="section-icon">📦</span> 6. Activity 3: POM.xml Configuration &amp; Maven Build Lifecycle</h2>
+          
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">STS POM Configuration Proof</span>
+                <span class="proof-title">STS 4 Editor — pom.xml Starters &amp; Dependencies</span>
+              </div>
+              <div class="ss-img-wrap" data-title="STS pom.xml Editor Proof">
+                <img src="../assets/images/week-9/pom_xml_step_1.png" alt="STS pom.xml Editor Proof" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic STS editor screenshot showing POM XML hierarchy and spring-boot-starter-parent.</p>
+            </div>
+          </div>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">📦</span> pom.xml</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-code-btn" data-filename="pom.xml">⬇ Download pom.xml</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;3.1.2&lt;/version&gt;
+        &lt;relativePath/&gt;
+    &lt;/parent&gt;
+
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;springmavendemo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springmavendemo&lt;/name&gt;
+
+    &lt;properties&gt;
+        &lt;java.version&gt;17&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULT ANALYSIS -->
+        <section class="content-section" id="result-analysis">
+          <h2 class="content-section-title"><span class="section-icon">📊</span> 7. Result Analysis &amp; Discussion</h2>
+          <div class="analysis-grid">
+            <div class="analysis-card">
+              <div class="analysis-card-title">🔍 Maven Dependency Management &amp; BOM</div>
+              <p><code>spring-boot-starter-parent</code> acts as a centralized Bill of Materials (BOM), locking compatible versions for over 150 third-party libraries (Jackson, Tomcat, SLF4J), completely eliminating classpath jar conflicts.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">⚡ Embedded Container Architecture</div>
+              <p>Spring Boot packages an embedded Apache Tomcat engine inside executable fat JARs (<code>spring-boot-maven-plugin</code>), eliminating manual WAR generation and external servlet container deployments.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">🛡️ Auto-Configuration &amp; Conditionals</div>
+              <p>Through <code>@ConditionalOnClass</code> and <code>@EnableAutoConfiguration</code>, Spring Boot inspects the classpath and instantiates necessary beans (DispatcherServlet, Jackson JSON converters) only when dependencies exist.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">💡 Multi-Port Isolation &amp; Microservices</div>
+              <p>Configuring independent server ports (8080 and 8081) in <code>application.properties</code> demonstrates modular microservice process isolation on the same physical host machine.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="content-section" id="gallery">
+          <div class="gallery-section-header">
+            <h2 class="content-section-title mb-0" style="border-bottom:none;padding-bottom:0">
+              <span class="section-icon">🖼️</span> 8. Step-by-Step Execution Gallery (All 11 Authentic STS Figures)
+            </h2>
+            <span class="badge badge-purple">11 Authentic STS Screenshots</span>
+          </div>
+          <p>Extracted directly from authoritative student submissions:</p>
+          <div class="gallery-grid">
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.1</span><span class="ss-counter-badge">[1 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.1: Spring Starter Project Wizard"><img src="../assets/images/week-9/maven_demo_step_1.png" alt="Figure 9.1" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">STS Starter Wizard</div><div class="ss-subcaption">Configuring springmavendemo group, artifact, and Java 17.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.2</span><span class="ss-counter-badge">[2 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.2: HelloController in STS"><img src="../assets/images/week-9/maven_demo_step_2.png" alt="Figure 9.2" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">HelloController Source Code</div><div class="ss-subcaption">Authoring @RestController and @GetMapping("/hello").</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.3</span><span class="ss-counter-badge">[3 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.3: STS Run as Spring Boot App"><img src="../assets/images/week-9/maven_demo_step_3.png" alt="Figure 9.3" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">STS Run Project Action</div><div class="ss-subcaption">Launching application via Spring Boot App runtime.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.4</span><span class="ss-counter-badge">[4 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.4: STS Console Embedded Tomcat Startup"><img src="../assets/images/week-9/maven_demo_step_4.png" alt="Figure 9.4" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">STS Console Logs</div><div class="ss-subcaption">Embedded Tomcat initialized on port 8080.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.5</span><span class="ss-counter-badge">[5 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.5: Browser Output on Port 8080"><img src="../assets/images/week-9/maven_demo_step_5.png" alt="Figure 9.5" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Browser REST Endpoint Output</div><div class="ss-subcaption">Browser displaying greeting string on localhost:8080/hello.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.6</span><span class="ss-counter-badge">[6 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.6: Student Management Setup"><img src="../assets/images/week-9/student_mgmt_step_1.png" alt="Figure 9.6" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">studentmanagement Setup</div><div class="ss-subcaption">Project configuration in Spring Tool Suite.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.7</span><span class="ss-counter-badge">[7 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.7: StudentController in STS"><img src="../assets/images/week-9/student_mgmt_step_2.png" alt="Figure 9.7" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">StudentController Source Code</div><div class="ss-subcaption">Authoring @GetMapping("/students") in STS editor.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.8</span><span class="ss-counter-badge">[8 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.8: Port 8081 Configuration"><img src="../assets/images/week-9/student_mgmt_step_3.png" alt="Figure 9.8" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">application.properties Port Setting</div><div class="ss-subcaption">Configuring server.port=8081 for service isolation.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.9</span><span class="ss-counter-badge">[9 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.9: STS Console on Port 8081"><img src="../assets/images/week-9/student_mgmt_step_4.png" alt="Figure 9.9" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">STS Console Logs (Port 8081)</div><div class="ss-subcaption">Tomcat started on port 8081 (http) with context path.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.10</span><span class="ss-counter-badge">[10 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.10: Browser Student Output (Port 8081)"><img src="../assets/images/week-9/student_mgmt_step_5.png" alt="Figure 9.10" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Browser Output: Student Details</div><div class="ss-subcaption">Browser rendering student credentials on port 8081.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 9.11</span><span class="ss-counter-badge">[11 / 11]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 9.11: Comprehensive POM.xml Configuration"><img src="../assets/images/week-9/pom_xml_step_1.png" alt="Figure 9.11" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">POM.xml Hierarchy in STS</div><div class="ss-subcaption">XML structure declaring starter dependencies and plugins.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="result">
+          <h2 class="content-section-title"><span class="section-icon">🏁</span> 9. Conclusion</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✔</span> Successfully created and executed Maven Spring Boot applications in STS 4.</div>
+            <div class="outcome-item"><span class="check">✔</span> Deployed REST controllers on default port 8080 and custom port 8081.</div>
+            <div class="outcome-item"><span class="check">✔</span> Configured production-grade <code>pom.xml</code> declaring starters and build plugins.</div>
+            <div class="outcome-item"><span class="check">✔</span> Documented all 11 authentic STS screenshots verifying complete project build lifecycle.</div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- IMAGE ZOOM LIGHTBOX MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-label="Screenshot Preview">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Preview" title="Close (Esc)">&times;</button>
+      <img src="" alt="Screenshot Preview" class="modal-img" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background:#1E1B18;color:#DDD5C8;padding:40px 24px 28px;border-top:2px solid #542B36;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:800;color:#FFFEFA;font-size:1.05rem;letter-spacing:0.04em;">Advanced Java Programming Lab Record (24IT385) · Technical Field Journal</div>
+        <div style="font-size:0.84rem;margin-top:4px;">CHINNATHAMBI NARAYANAN POOJA CHANDRAN · Roll Number: <strong style="color:#C58A45;">24EU08145</strong> · Department of Information Technology</div>
+        <div style="font-size:0.78rem;color:#A39D95;">Siddhartha Academy of Higher Education · Academic Year 2026–2027</div>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <a href="../../24EU08145.html" class="btn btn-secondary btn-sm" style="color:#FFFEFA;border-color:#542B36;background:#542B36;">🏠 Home Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

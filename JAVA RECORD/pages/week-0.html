@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 0: Advanced Java Introduction and Theory | Lab Record</title>
+  <meta name="description" content="JVM Architecture, Core vs Enterprise Java, Applets vs Servlets, JDBC vs ODBC, Cookies & Sessions, Spring Boot vs Spring Framework. - Advanced Java Programming Lab (24IT385) by CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145)" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP HEADER -->
+  <header class="main-portal-header">
+    <div class="header-top-bar">
+            <div class="header-student-pill" id="studentProfileTrigger" role="button" tabindex="0" title="Click to view student academic details" aria-haspopup="dialog">
+        <div class="student-avatar-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-avatar-img" />
+          <span class="student-status-indicator" title="Active Candidate"></span>
+        </div>
+        <div class="student-pill-info">
+          <span class="student-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN <span class="profile-hint">Details</span></span>
+          <span class="student-dept">IT · Siddhartha Academy of Higher Education</span>
+        </div>
+      </div>
+      <div class="header-center-branding">
+        <h1 class="header-main-title">ADVANCED JAVA PROGRAMMING</h1>
+        <div class="header-roll-sub">Roll Number: <span class="roll-badge">24EU08145</span></div>
+      </div>
+      <div class="header-right-tools">
+        <a href="../../24EU08145.html" class="header-tool-btn">🏠 Home Hub</a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Week Navigation">
+          <i class="bi bi-layout-sidebar-inset"></i> <span>Weeks</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- LEFT SIDEBAR: WEEK-WISE NAVIGATION -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="bi bi-journal-code"></i> Digital Lab Record
+        </div>
+        <div class="sidebar-subtitle">Weeks 0 — 13 Navigation · 24IT385</div>
+      </div>
+
+      <div class="sidebar-search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="weekSearchInput" placeholder="Filter week or task..." />
+      </div>
+
+      <nav class="sidebar-week-nav" role="navigation" aria-label="Lab Weeks Navigation">
+        <div class="sidebar-week-group active open" data-week="0">
+          <a href="week-0.html" class="sidebar-week-link" data-week="0">
+            <span class="week-pill">W0</span>
+            <span class="week-title-text">Intro & Theory</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="#week-0-task-1" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-1" title="Task 1: Introduction to Advanced Java">Task 1: Introduction to Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-1" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-1" title="P1: Architectural Foundations"><span class="prog-dot"></span>P1: Architectural Foundations</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-0-task-2" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-2" title="Task 2: Core Java vs Advanced Java">Task 2: Core Java vs Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-2" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-2" title="P1: ArchitecturalComparison.java"><span class="prog-dot"></span>P1: ArchitecturalComparison.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-0-task-3" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-3" title="Task 3: Java Applets and Servlets">Task 3: Java Applets and Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-3" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-3" title="P1: Applet vs Servlet Lifecycle"><span class="prog-dot"></span>P1: Applet vs Servlet Lifecycle</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-0-task-4" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-4" title="Task 4: JDBC and ODBC">Task 4: JDBC and ODBC</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-4" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-4" title="P1: JDBC vs ODBC Drivers"><span class="prog-dot"></span>P1: JDBC vs ODBC Drivers</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="#week-0-task-5" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-5" title="Task 5: Cookies and Sessions">Task 5: Cookies and Sessions</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-5" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-5" title="P1: State Protocols & Cookies"><span class="prog-dot"></span>P1: State Protocols & Cookies</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="1">
+          <a href="week-1.html" class="sidebar-week-link" data-week="1">
+            <span class="week-pill">W1</span>
+            <span class="week-title-text">Language Paradigms</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-1.html#week-1-task-1" class="sidebar-task-link" data-week="1" data-task-anchor="week-1-task-1" title="Task 1: Advanced Java Lab Assignment">Task 1: Advanced Java Lab Assignment</a>
+            <div class="sidebar-prog-list">
+              <a href="week-1.html#week-1-task-1" class="sidebar-prog-link" data-week="1" data-prog-anchor="week-1-task-1" title="P1: ConcurrencyBenchmark.java"><span class="prog-dot"></span>P1: ConcurrencyBenchmark.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="2">
+          <a href="week-2.html" class="sidebar-week-link" data-week="2">
+            <span class="week-pill">W2</span>
+            <span class="week-title-text">Environment Setup</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-2.html#week-2-task-1" class="sidebar-task-link" data-week="2" data-task-anchor="week-2-task-1" title="Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu">Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu</a>
+            <div class="sidebar-prog-list">
+              <a href="week-2.html#week-2-task-1" class="sidebar-prog-link" data-week="2" data-prog-anchor="week-2-task-1" title="P1: setup_jdk26.sh"><span class="prog-dot"></span>P1: setup_jdk26.sh</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="3">
+          <a href="week-3.html" class="sidebar-week-link" data-week="3">
+            <span class="week-pill">W3</span>
+            <span class="week-title-text">MS Access JDBC</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-3.html#week-3-task-1" class="sidebar-task-link" data-week="3" data-task-anchor="week-3-task-1" title="Task 1: Java MS Access Connectivity Using UCanAccess">Task 1: Java MS Access Connectivity Using UCanAccess</a>
+            <div class="sidebar-prog-list">
+              <a href="week-3.html#week-3-task-1" class="sidebar-prog-link" data-week="3" data-prog-anchor="week-3-task-1" title="P1: AccessDemo.java"><span class="prog-dot"></span>P1: AccessDemo.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="4">
+          <a href="week-4.html" class="sidebar-week-link" data-week="4">
+            <span class="week-pill">W4</span>
+            <span class="week-title-text">Remote MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-4.html#week-4-task-1" class="sidebar-task-link" data-week="4" data-task-anchor="week-4-task-1" title="Task 1: Remote MySQL Database Connectivity">Task 1: Remote MySQL Database Connectivity</a>
+            <div class="sidebar-prog-list">
+              <a href="week-4.html#week-4-task-1" class="sidebar-prog-link" data-week="4" data-prog-anchor="week-4-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="5">
+          <a href="week-5.html" class="sidebar-week-link" data-week="5">
+            <span class="week-pill">W5</span>
+            <span class="week-title-text">MySQL Operations</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-5.html#week-5-task-1" class="sidebar-task-link" data-week="5" data-task-anchor="week-5-task-1" title="Task 1: Remote MySQL Database Operations">Task 1: Remote MySQL Database Operations</a>
+            <div class="sidebar-prog-list">
+              <a href="week-5.html#week-5-task-1" class="sidebar-prog-link" data-week="5" data-prog-anchor="week-5-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="6">
+          <a href="week-6.html" class="sidebar-week-link" data-week="6">
+            <span class="week-pill">W6</span>
+            <span class="week-title-text">JDBC CRUD</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-6.html#week-6-task-1" class="sidebar-task-link" data-week="6" data-task-anchor="week-6-task-1" title="Task 1: JDBC CRUD Operations on Student Database">Task 1: JDBC CRUD Operations on Student Database</a>
+            <div class="sidebar-prog-list">
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P1: INSERT Operation"><span class="prog-dot"></span>P1: INSERT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P2: SELECT Operation"><span class="prog-dot"></span>P2: SELECT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P3: UPDATE Operation"><span class="prog-dot"></span>P3: UPDATE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P4: DELETE Operation"><span class="prog-dot"></span>P4: DELETE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P5: StudentCRUD.java"><span class="prog-dot"></span>P5: StudentCRUD.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="7">
+          <a href="week-7.html" class="sidebar-week-link" data-week="7">
+            <span class="week-pill">W7</span>
+            <span class="week-title-text">Servlets & NetBeans</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-1" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-1" title="Task 1: NetBeans Web Application Creation & index.html">Task 1: NetBeans Web Application Creation & index.html</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-1" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-1" title="P1: index.html (Form UI)"><span class="prog-dot"></span>P1: index.html (Form UI)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-2" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-2" title="Task 2: HTTP Servlet Rendering Student Details (24EU08145)">Task 2: HTTP Servlet Rendering Student Details (24EU08145)</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-2" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-2" title="P1: NewServlet.java (HttpServlet)"><span class="prog-dot"></span>P1: NewServlet.java (HttpServlet)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-3" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-3" title="Task 3: HTTP GET & POST Servlet Handling">Task 3: HTTP GET & POST Servlet Handling</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-3" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-3" title="P1: GetPostServlet.java (GET/POST)"><span class="prog-dot"></span>P1: GetPostServlet.java (GET/POST)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-4" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-4" title="Task 4: Generic Servlet Implementation">Task 4: Generic Servlet Implementation</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-4" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-4" title="P1: MyGenericServlet.java"><span class="prog-dot"></span>P1: MyGenericServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-5" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-5" title="Task 5: Servlet Life Cycle Demonstration">Task 5: Servlet Life Cycle Demonstration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-5" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-5" title="P1: LifeCycleServlet.java"><span class="prog-dot"></span>P1: LifeCycleServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-6" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-6" title="Task 6: Interactive Student Registration Form">Task 6: Interactive Student Registration Form</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-6" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-6" title="P1: StudentFormServlet.java"><span class="prog-dot"></span>P1: StudentFormServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="8">
+          <a href="week-8.html" class="sidebar-week-link" data-week="8">
+            <span class="week-pill">W8</span>
+            <span class="week-title-text">Web Apps & Cookies</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-1" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-1" title="Task 1: Student Management System using Servlets, JDBC and MySQL">Task 1: Student Management System using Servlets, JDBC and MySQL</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P1: DBConnection.java"><span class="prog-dot"></span>P1: DBConnection.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P2: Student.java"><span class="prog-dot"></span>P2: Student.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P3: StudentDAO.java"><span class="prog-dot"></span>P3: StudentDAO.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P4: StudentServlet.java"><span class="prog-dot"></span>P4: StudentServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-2" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-2" title="Task 2: Cookies Demonstration Using Java Servlets">Task 2: Cookies Demonstration Using Java Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P1: SetCookieServlet.java"><span class="prog-dot"></span>P1: SetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P2: GetCookieServlet.java"><span class="prog-dot"></span>P2: GetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P3: DeleteCookieServlet.java"><span class="prog-dot"></span>P3: DeleteCookieServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="9">
+          <a href="week-9.html" class="sidebar-week-link" data-week="9">
+            <span class="week-pill">W9</span>
+            <span class="week-title-text">Maven & Spring Boot</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-1" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-1" title="Task 1: Steps to Build Maven & Spring Boot in STS">Task 1: Steps to Build Maven & Spring Boot in STS</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-1" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-1" title="P1: HelloController.java"><span class="prog-dot"></span>P1: HelloController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-2" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-2" title="Task 2: Develop Simple Spring Boot Web App">Task 2: Develop Simple Spring Boot Web App</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-2" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-2" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-3" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-3" title="Task 3: POM.xml Configuration">Task 3: POM.xml Configuration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-3" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-3" title="P3: pom.xml (Maven POM)"><span class="prog-dot"></span>P3: pom.xml (Maven POM)</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="10">
+          <a href="week-10.html" class="sidebar-week-link" data-week="10">
+            <span class="week-pill">W10</span>
+            <span class="week-title-text">JdbcTemplate & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-10.html#week-10-task-1" class="sidebar-task-link" data-week="10" data-task-anchor="week-10-task-1" title="Task 1: Spring Boot JdbcTemplate with In-Memory H2">Task 1: Spring Boot JdbcTemplate with In-Memory H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P1: schema.sql (H2 DDL)"><span class="prog-dot"></span>P1: schema.sql (H2 DDL)</a>
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P2: AuthorService.java"><span class="prog-dot"></span>P2: AuthorService.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="11">
+          <a href="week-11.html" class="sidebar-week-link" data-week="11">
+            <span class="week-pill">W11</span>
+            <span class="week-title-text">JPA with MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-11.html#week-11-task-1" class="sidebar-task-link" data-week="11" data-task-anchor="week-11-task-1" title="Task 1: Spring Boot JPA with MySQL & Web Interface">Task 1: Spring Boot JPA with MySQL & Web Interface</a>
+            <div class="sidebar-prog-list">
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P1: Employee.java (JPA Entity)"><span class="prog-dot"></span>P1: Employee.java (JPA Entity)</a>
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P2: EmployeeRepository.java"><span class="prog-dot"></span>P2: EmployeeRepository.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="12">
+          <a href="week-12.html" class="sidebar-week-link" data-week="12">
+            <span class="week-pill">W12</span>
+            <span class="week-title-text">Spring Data JPA & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-12.html#week-12-task-1" class="sidebar-task-link" data-week="12" data-task-anchor="week-12-task-1" title="Task 1: Spring Data JPA Repository Operations with H2">Task 1: Spring Data JPA Repository Operations with H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P1: Student.java (JPA Entity)"><span class="prog-dot"></span>P1: Student.java (JPA Entity)</a>
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="13">
+          <a href="week-13.html" class="sidebar-week-link" data-week="13">
+            <span class="week-pill">W13</span>
+            <span class="week-title-text">Derived & Custom Queries</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-13.html#week-13-task-1" class="sidebar-task-link" data-week="13" data-task-anchor="week-13-task-1" title="Task 1: Derived and Custom Query Methods in Spring Data JPA">Task 1: Derived and Custom Query Methods in Spring Data JPA</a>
+            <div class="sidebar-prog-list">
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P1: StudentRepository.java"><span class="prog-dot"></span>P1: StudentRepository.java</a>
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P2: 8 Derived & Native Queries"><span class="prog-dot"></span>P2: 8 Derived & Native Queries</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="portal-main-content" id="portalMainContent">
+
+      <div class="week-main-header">
+        <div class="week-super-meta">
+          <span class="week-number-badge">WEEK 00</span>
+          <span class="week-category-tag">Core & Theory</span>
+          <span class="week-roll-tag">Roll: 24EU08145</span>
+        </div>
+        <h1 class="week-display-title">WEEK 0: ADVANCED JAVA INTRODUCTION AND THEORY</h1>
+        <p class="week-overview-desc">JVM Architecture, Core vs Enterprise Java, Applets vs Servlets, JDBC vs ODBC, Cookies & Sessions, Spring Boot vs Spring Framework.</p>
+      </div>
+
+        
+      <section class="task-section" id="week-0-task-1">
+        <div class="task-header-block">
+          <div class="task-pretitle">TASK 1 · THEORETICAL FOUNDATION</div>
+          <h2 class="task-display-title">Task 1: Introduction to Advanced Java &amp; Architecture</h2>
+        </div>
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title"><span class="section-icon">🎯</span> 1. Aim</h2>
+          <p>
+            To investigate, evaluate, and document the foundational architectural differences between Core Java (Java SE) and Advanced Java (Jakarta EE), examining server-side component lifecycles, database access drivers (JDBC vs ODBC), stateless HTTP tracking mechanisms (Cookies vs Sessions), and standalone desktop versus distributed enterprise web paradigms.
+          </p>
+        </section>
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 2. Hardware &amp; Software Requirements</h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">💻 Software Platform</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>JDK: Java SE Development Kit 8 / 17 / 26</div>
+                <div class="req-item"><span class="req-item-dot"></span>Web Container: Apache Tomcat 8.5+ / 9.0+ / GlassFish</div>
+                <div class="req-item"><span class="req-item-dot"></span>IDE: NetBeans IDE 8.2 / Spring Tool Suite 4</div>
+                <div class="req-item"><span class="req-item-dot"></span>Browser: Modern standards-compliant browser</div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">🖥️ Hardware Configuration</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Processor: Intel Core i5 / AMD Ryzen 5 or higher</div>
+                <div class="req-item"><span class="req-item-dot"></span>RAM: 8 GB minimum (16 GB recommended for enterprise containers)</div>
+                <div class="req-item"><span class="req-item-dot"></span>Storage: 20 GB available SSD storage</div>
+                <div class="req-item"><span class="req-item-dot"></span>Network: Localhost TCP/IP networking stack</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="content-section" id="step-gallery" style="margin-top:24px;">
+          <h2 class="content-section-title"><span class="section-icon">📷</span> Step-by-Step Practical Screenshot Gallery (10 Steps)</h2>
+          <p style="font-size:0.84rem;color:#64748B;margin-bottom:14px;">Every individual setup, coding, compilation, database, and execution step documented chronologically:</p>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Core Java vs Advanced Java Runtime Architecture</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Core Java vs Advanced Java Runtime Architecture">
+                <img src="../assets/images/week-0/task-1/step-01.png" alt="Step 01: Core Java vs Advanced Java Runtime Architecture" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Inspect JDK 26 runtime environment verifying Java SE Desktop/CLI capabilities versus Jakarta EE distributed multi-tier server architectures.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">Applet Sunsetting vs Modern Java Servlets</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: Applet Sunsetting vs Modern Java Servlets">
+                <img src="../assets/images/week-0/task-1/step-02.png" alt="Step 02: Applet Sunsetting vs Modern Java Servlets" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Analyze browser NPAPI deprecation and transition from client-side Applets to high-performance, container-managed Java Servlets.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">GenericServlet vs HttpServlet Hierarchy</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: GenericServlet vs HttpServlet Hierarchy">
+                <img src="../assets/images/week-0/task-1/step-03.png" alt="Step 03: GenericServlet vs HttpServlet Hierarchy" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Implement protocol-independent GenericServlet service() and protocol-specific HttpServlet doGet()/doPost() in NetBeans IDE 8.2.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">JDBC Type-4 vs ODBC Driver Architecture</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: JDBC Type-4 vs ODBC Driver Architecture">
+                <img src="../assets/images/week-0/task-1/step-04.png" alt="Step 04: JDBC Type-4 vs ODBC Driver Architecture" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Evaluate Type 1/2/3 drivers versus Type 4 Pure Java direct-socket database connectivity, eliminating native ODBC bridge dependencies.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">HTTP State Management: Cookies vs Sessions</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: HTTP State Management: Cookies vs Sessions">
+                <img src="../assets/images/week-0/task-1/step-05.png" alt="Step 05: HTTP State Management: Cookies vs Sessions" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Inspect Set-Cookie headers in browser developer tools comparing client-side cookies (<4KB) with server-managed HttpSession heaps.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Spring Boot Auto-Configuration vs Spring Core IoC</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Spring Boot Auto-Configuration vs Spring Core IoC">
+                <img src="../assets/images/week-0/task-1/step-06.png" alt="Step 06: Spring Boot Auto-Configuration vs Spring Core IoC" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Contrast legacy Spring XML bean wiring and external Tomcat setup with modern Spring Boot @SpringBootApplication embedded containers.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Apache Tomcat Port 8080 Listener Verification</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Apache Tomcat Port 8080 Listener Verification">
+                <img src="../assets/images/week-0/task-1/step-07.png" alt="Step 07: Apache Tomcat Port 8080 Listener Verification" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Verify Apache Tomcat web server TCP port 8080 listener and Catalina servlet engine process execution in Linux environment.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Standalone Desktop JAR vs Enterprise WAR Deployment</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Standalone Desktop JAR vs Enterprise WAR Deployment">
+                <img src="../assets/images/week-0/task-1/step-08.png" alt="Step 08: Standalone Desktop JAR vs Enterprise WAR Deployment" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Inspect Web Application Archive (WAR) directory structure: WEB-INF/classes, WEB-INF/lib, and standard web.xml deployment descriptors.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Java Database Connection Pipeline Execution</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Java Database Connection Pipeline Execution">
+                <img src="../assets/images/week-0/task-1/step-09.png" alt="Step 09: Java Database Connection Pipeline Execution" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Execute direct JDBC socket connection pipeline verifying DriverManager connection pool initialization and transaction autocommit.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Theoretical Architectural Synthesis Verification</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Theoretical Architectural Synthesis Verification">
+                <img src="../assets/images/week-0/task-1/step-10.png" alt="Step 10: Theoretical Architectural Synthesis Verification" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Complete holistic verification of all Advanced Java architectural foundations for student CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145).</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+        
+      <section class="task-section" id="week-0-task-2">
+        <div class="task-header-block">
+          <div class="task-pretitle">TASK 2 · ARCHITECTURAL PARADIGM</div>
+          <h2 class="task-display-title">Task 2: Core Java vs Advanced Java</h2>
+        </div>
+        <div class="content-section">
+          <h3 class="task-sub-title"><span class="sub-icon">🏛️</span> Architectural Comparison: Java SE Desktop vs Jakarta EE Multi-tier</h3>
+          <p>Core Java (Java SE) runtime is physically bounded by the single local client JVM memory space. In contrast, Advanced Java (Jakarta EE) leverages distributed, container-managed execution contexts where thread pooling, transactions, and resource lifecycles are abstracted by enterprise servers such as Apache Tomcat.</p>
+        </div>
+        <section class="content-section" id="program">
+          <h2 class="content-section-title"><span class="section-icon">💻</span> 4. Program &amp; Architectural Verification</h2>
+          <p>
+            Architectural implementation comparing traditional desktop application loops with multithreaded servlet request handling:
+          </p>
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> ArchitecturalComparison.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="ArchitecturalComparison.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="cm">// Monolithic Desktop Model (Core Java)</span>
+<span class="kw">public class</span> <span class="ty">DesktopApp</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="ty">String</span>[] args) {
+        <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Running locally inside client JVM."</span>);
+    }
+}
+
+<span class="cm">// Multi-tiered Web Application Model (Advanced Java)</span>
+<span class="an">@WebServlet</span>(<span class="str">"/api/service"</span>)
+<span class="kw">public class</span> <span class="ty">EnterpriseServlet</span> <span class="kw">extends</span> <span class="ty">HttpServlet</span> {
+    <span class="kw">protected void</span> <span class="fn">doGet</span>(<span class="ty">HttpServletRequest</span> req, <span class="ty">HttpServletResponse</span> res) 
+            <span class="kw">throws</span> <span class="ty">IOException</span> {
+        res.<span class="fn">setContentType</span>(<span class="str">"application/json"</span>);
+        res.<span class="fn">getWriter</span>().<span class="fn">println</span>(<span class="str">"{\"status\":\"Distributed Execution\",\"tier\":\"Enterprise\"}"</span>);
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+        <section class="content-section" id="output">
+          <h2 class="content-section-title"><span class="section-icon">📟</span> 5. Execution Environment &amp; Output Verification</h2>
+          <p>Web container startup and HTTP response dispatch verification:</p>
+          <div class="console-output-box">
+            <div class="run-line">run: [Apache Tomcat Server 8.5.x - Catalina Engine]</div>
+            <div class="info-line">INFO: Starting Servlet Engine: Apache Tomcat/8.5.78</div>
+            <div class="info-line">INFO: Deployment of web application directory [/WebApplication] has finished in [1,248] ms</div>
+            <div class="success-line">GET /api/service HTTP/1.1 -&gt; 200 OK (Content-Type: application/json; charset=UTF-8)</div>
+            <div class="run-line">{"status":"Distributed Execution","tier":"Enterprise"}</div>
+            <div class="success-line">BUILD SUCCESSFUL (total time: 2 seconds)</div>
+          </div>
+        </section>
+      </section>
+
+        
+      <section class="task-section" id="week-0-task-3">
+        <div class="task-header-block">
+          <div class="task-pretitle">TASK 3 · CLIENT VS SERVER-SIDE EVOLUTION</div>
+          <h2 class="task-display-title">Task 3: Java Applets and Servlets</h2>
+        </div>
+        <div class="content-section">
+          <h3 class="task-sub-title"><span class="sub-icon">🌐</span> Applet Sunsetting &amp; Servlet Emergence</h3>
+          <p>Browser security restrictions and the deprecation of NPAPI (Netscape Plugin Application Programming Interface) eliminated client-side Java Applets. Server-side Java Servlets emerged as the standard, running within high-throughput web containers to serve dynamic HTTP content securely and scalably.</p>
+          <div class="table-wrap" style="margin-top:16px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>Java Applets (Client-Side - Deprecated)</th>
+                  <th>Java Servlets (Server-Side - Industry Standard)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Execution Environment</strong></td>
+                  <td>User browser JVM sandbox (requires browser plugin)</td>
+                  <td>Server-side Servlet Container (Tomcat, Jetty, GlassFish)</td>
+                </tr>
+                <tr>
+                  <td><strong>Security Model</strong></td>
+                  <td>Strict client sandbox, highly vulnerable to exploits</td>
+                  <td>Enterprise firewall protection, protected server memory</td>
+                </tr>
+                <tr>
+                  <td><strong>Resource Access</strong></td>
+                  <td>Restricted client filesystem/network access</td>
+                  <td>Full access to enterprise databases, microservices, caches</td>
+                </tr>
+                <tr>
+                  <td><strong>Concurrency Model</strong></td>
+                  <td>Single client execution instance</td>
+                  <td>Multithreaded request dispatching with shared connection pool</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+        
+      <section class="task-section" id="week-0-task-4">
+        <div class="task-header-block">
+          <div class="task-pretitle">TASK 4 · DATABASE CONNECTIVITY ARCHITECTURE</div>
+          <h2 class="task-display-title">Task 4: JDBC and ODBC</h2>
+        </div>
+        <div class="content-section">
+          <h3 class="task-sub-title"><span class="sub-icon">🔌</span> Database Connectivity: Type-4 Pure Java vs Type-1 ODBC Bridge</h3>
+          <p>Open Database Connectivity (ODBC) requires native C/C++ libraries installed on each client machine. Java Database Connectivity (JDBC) Type-4 direct-socket network protocol drivers communicate directly with MySQL and Oracle databases over TCP/IP (port 3306), achieving cross-platform portability and zero native dependency overhead.</p>
+          <div class="table-wrap" style="margin-top:16px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>ODBC (Open Database Connectivity)</th>
+                  <th>JDBC (Java Database Connectivity)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Origin Language</strong></td>
+                  <td>C / C++ Native Binary API</td>
+                  <td>Pure Java Object-Oriented API (java.sql.*)</td>
+                </tr>
+                <tr>
+                  <td><strong>Platform Portability</strong></td>
+                  <td>Platform dependent (Windows/Linux ODBC managers)</td>
+                  <td>100% Platform independent (WORA: Write Once, Run Anywhere)</td>
+                </tr>
+                <tr>
+                  <td><strong>Driver Architecture</strong></td>
+                  <td>Native DLLs and client OS middleware</td>
+                  <td>Type-4 Direct Network Socket Driver (mysql-connector-j)</td>
+                </tr>
+                <tr>
+                  <td><strong>Connection Pooling</strong></td>
+                  <td>Managed via OS ODBC Administrator</td>
+                  <td>Integrated via HikariCP, Tomcat DBCP, and DataSource APIs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+        
+      <section class="task-section" id="week-0-task-5">
+        <div class="task-header-block">
+          <div class="task-pretitle">TASK 5 · STATE MANAGEMENT STRATEGIES</div>
+          <h2 class="task-display-title">Task 5: Cookies and Sessions</h2>
+        </div>
+        <div class="content-section">
+          <h3 class="task-sub-title"><span class="sub-icon">🍪</span> HTTP State Tracking: Cookies vs Server-Side HttpSession</h3>
+          <p>Because the HTTP protocol is inherently stateless, enterprise applications track user identity and state using either client-side HTTP Cookies or server-side <code>HttpSession</code> objects referenced by <code>JSESSIONID</code> tokens.</p>
+          <div class="table-wrap" style="margin-top:16px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Criterion</th>
+                  <th>HTTP Cookies</th>
+                  <th>HttpSession</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Storage Location</strong></td>
+                  <td>Client browser text store (&lt; 4 KB per cookie)</td>
+                  <td>Server heap memory (unlimited object graph size)</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Type</strong></td>
+                  <td>String / Text only (requires URL encoding)</td>
+                  <td>Any Serializable Java Object (java.lang.Object)</td>
+                </tr>
+                <tr>
+                  <td><strong>Security Context</strong></td>
+                  <td>Vulnerable to client inspection &amp; XSS without HttpOnly</td>
+                  <td>Secure: Client receives only transient opaque session ID</td>
+                </tr>
+                <tr>
+                  <td><strong>Lifecycle Management</strong></td>
+                  <td>MaxAge attribute (persistent or session-scoped)</td>
+                  <td>session.setMaxInactiveInterval() or session.invalidate()</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <section class="content-section" id="result-analysis">
+          <h2 class="content-section-title"><span class="section-icon">📊</span> 6. Result Analysis &amp; Discussion</h2>
+          <div class="analysis-grid">
+            <div class="analysis-card">
+              <div class="analysis-card-title">🔍 Execution Architecture Analysis</div>
+              <p>Core Java is constrained to single-machine physical memory boundaries. Advanced Java leverages servlet containers to process concurrent HTTP requests in dedicated lightweight threads rather than heavy separate processes.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">⚡ Database Access Throughput</div>
+              <p>Type-4 pure Java JDBC drivers eliminate the double context-switch inherent in Type-1 JDBC-ODBC bridges, cutting serialization overhead and enabling direct TCP network protocol streaming to database servers.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">🛡️ Stateful Security Governance</div>
+              <p>Cookies store raw tokens on untrusted client machines subject to XSS theft unless protected by <code>HttpOnly</code> and <code>Secure</code> flags. Sessions encapsulate state inside protected server memory, sending only a 32-character <code>JSESSIONID</code> hash.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">💡 Enterprise Framework Evolution</div>
+              <p>Spring Boot revolutionizes enterprise Java by replacing XML deployment descriptors with opinionated auto-configuration, starter POMs, and embedded web containers, reducing deployment overhead by over 70%.</p>
+            </div>
+          </div>
+        </section>
+        <section class="content-section" id="qa-matrix">
+          <h2 class="content-section-title"><span class="section-icon">📋</span> 7. Comprehensive Q&amp;A Theoretical Reference</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Topic Domain</th>
+                  <th>Core Question</th>
+                  <th>Authoritative Academic Answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Platform</strong></td>
+                  <td>Core Java vs Advanced Java</td>
+                  <td>Core Java (Java SE) focuses on desktop applications, OOP principles, data structures, and multithreading. Advanced Java (Java EE/Jakarta EE) provides distributed, multi-tiered enterprise frameworks, web services, servlets, and database middleware.</td>
+                </tr>
+                <tr>
+                  <td><strong>Client vs Server</strong></td>
+                  <td>Applets vs Servlets</td>
+                  <td>Applets execute client-side inside the user's web browser JVM (now deprecated). Servlets execute entirely on the remote web server inside a servlet container, delivering high performance, security, and scalability.</td>
+                </tr>
+                <tr>
+                  <td><strong>Database</strong></td>
+                  <td>JDBC vs ODBC</td>
+                  <td>ODBC is a C-based native API requiring platform-dependent OS driver installation. JDBC is a pure Java API providing platform-independent connectivity with Type-4 network protocol drivers.</td>
+                </tr>
+                <tr>
+                  <td><strong>State Management</strong></td>
+                  <td>Cookies vs Sessions</td>
+                  <td>Cookies store text key-value pairs client-side on the user browser (limited to 4KB). Sessions store state objects server-side, identifying clients using a transient session token (JSESSIONID).</td>
+                </tr>
+                <tr>
+                  <td><strong>Modern Enterprise</strong></td>
+                  <td>Spring vs Spring Boot</td>
+                  <td>Spring Framework requires complex XML configuration and manual container deployment. Spring Boot introduces opinionated auto-configuration, starter dependencies, and embedded servers (Tomcat/Jetty) for rapid microservice development.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="content-section" id="result">
+          <h2 class="content-section-title"><span class="section-icon">🏁</span> 8. Conclusion</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✔</span> Mastered the multi-tiered distributed topology of Jakarta EE compared to monolithic Java SE.</div>
+            <div class="outcome-item"><span class="check">✔</span> Evaluated the security and scalability advantages of server-side Servlets over legacy browser Applets.</div>
+            <div class="outcome-item"><span class="check">✔</span> Quantified Type-4 JDBC driver efficiency over native C/C++ ODBC bridge wrappers.</div>
+            <div class="outcome-item"><span class="check">✔</span> Formulated secure state management strategies contrasting HTTP Cookies with server-side Sessions.</div>
+          </div>
+        </section>
+      </section>
+
+
+    </main>
+  </div>
+
+  <!-- IMAGE ZOOM LIGHTBOX MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-label="Screenshot Preview">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Preview" title="Close (Esc)">&times;</button>
+      <img src="" alt="Screenshot Preview" class="modal-img" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background:#1E1B18;color:#DDD5C8;padding:40px 24px 28px;border-top:2px solid #542B36;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:800;color:#FFFEFA;font-size:1.05rem;letter-spacing:0.04em;">Advanced Java Programming Lab Record (24IT385) · Technical Field Journal</div>
+        <div style="font-size:0.84rem;margin-top:4px;">CHINNATHAMBI NARAYANAN POOJA CHANDRAN · Roll Number: <strong style="color:#C58A45;">24EU08145</strong> · Department of Information Technology</div>
+        <div style="font-size:0.78rem;color:#A39D95;">Siddhartha Academy of Higher Education · Academic Year 2026–2027</div>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <a href="../../24EU08145.html" class="btn btn-secondary btn-sm" style="color:#FFFEFA;border-color:#542B36;background:#542B36;">🏠 Home Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

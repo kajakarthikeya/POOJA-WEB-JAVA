@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 1: Java MS Access Connection using UCanAccess / DSN | Lab Record</title>
+  <meta name="description"
+    content="Java program to connect to Microsoft Access database using UCanAccess JDBC driver with step-by-step terminal procedure and output." />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="navbar-inner">
+        <a href="../../24EU08145.html" class="nav-logo" aria-label="Back to home">
+          <div class="nav-logo-icon" aria-label="Java Logo">
+            <svg class="coffee-cup-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path class="steam steam-1" d="M6 7c0-1.5 1-2 1-3.5S6 2 6 0.5"></path>
+              <path class="steam steam-2" d="M12 6c0-1.5 1-2 1-3.5S12 1 12 0"></path>
+              <path class="steam steam-3" d="M18 7c0-1.5 1-2 1-3.5S18 2 18 0.5"></path>
+              <path d="M4 10h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-6z" fill="currentColor" fill-opacity="0.25"></path>
+              <path d="M17 11h2.5a2 2 0 0 1 2 2v1.5a2 2 0 0 1-2 2H17"></path>
+              <path d="M2 22h19"></path>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-title">Advanced Java Programming</span>
+            <span class="nav-logo-sub">Advanced Java Programming Lab</span>
+          </div>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="../index.html#hero" class="nav-link">Home</a></li>
+          <li><a href="../index.html#about" class="nav-link">About</a></li>
+          <li><a href="../index.html#topics" class="nav-link active">Topics</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="../index.html#topics" class="btn btn-secondary btn-sm">← All Topics</a>
+        </div>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="../../24EU08145.html" class="nav-link">🏠 Home</a>
+      <a href="../index.html#topics" class="nav-link">📚 All Topics</a>
+      <a href="mysql.html" class="nav-link">→ Exp 2: MySQL</a>
+      <a href="crud.html" class="nav-link">→ Exp 3: CRUD</a>
+      <a href="statement.html" class="nav-link">→ Exp 4: Statement</a>
+      <a href="resultset.html" class="nav-link">→ Exp 5: ResultSet</a>
+    </nav>
+  </header>
+
+  <main class="topic-page">
+
+    <!-- 1. EXPERIMENT TITLE -->
+    <div class="topic-hero">
+      <div class="container">
+        <div class="topic-hero-breadcrumb">
+          <a href="../../24EU08145.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="../index.html#topics">Topics</a>
+          <span class="breadcrumb-sep">›</span>
+          <span>Experiment 1</span>
+        </div>
+
+        <div class="topic-hero-meta">
+          <span class="topic-experiment-num">Experiment 01</span>
+          <span class="badge badge-purple">ADVANCED JAVA PROGRAMMING LAB</span>
+        </div>
+
+        <h1 class="topic-hero-title">
+          Java MS Access Connectivity<br />
+          <span class="highlight">using UCanAccess Driver</span>
+        </h1>
+
+        <div class="topic-meta-pills">
+          <span class="meta-pill">🗂️ MS Access Database</span>
+          <span class="meta-pill">🔌 UCanAccess 5.1.3</span>
+          <span class="meta-pill">☕ File: AccessDemo.java</span>
+          <span class="meta-pill">💻 Terminal / Command Prompt</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="topic-content-wrap container">
+
+      <!-- SIDEBAR TOC -->
+      <aside class="topic-sidebar" aria-label="Table of contents">
+        <p class="toc-title">Experiment Index</p>
+        <nav class="toc-list">
+          <a href="#aim" class="toc-item">1. Aim</a>
+          <a href="#intro" class="toc-item">2. Short Introduction</a>
+          <a href="#requirements" class="toc-item">3. Requirements</a>
+          <a href="#procedure" class="toc-item">4. Procedure Timeline</a>
+          <a href="#program" class="toc-item">5. Java Program</a>
+          <a href="#explanation" class="toc-item">6. Program Explanation</a>
+          <a href="#output" class="toc-item">7. Terminal Output</a>
+          <a href="#screenshots" class="toc-item">8. Screenshot Gallery (10)</a>
+          <a href="#result" class="toc-item">9. Result</a>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <article class="topic-main">
+
+        <!-- 2. AIM -->
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title">
+            <span class="section-icon">🎯</span> 1. Aim
+          </h2>
+          <p>
+            To write and execute a Java program (<code>AccessDemo.java</code>) to connect to a Microsoft Access database
+            (<code>.accdb</code>/<code>.mdb</code>) using UCanAccess JDBC driver and display records.
+          </p>
+        </section>
+
+        <!-- 3. SHORT INTRODUCTION -->
+        <section class="content-section" id="intro">
+          <h2 class="content-section-title">
+            <span class="section-icon">📖</span> 2. Short Introduction
+          </h2>
+          <p>
+            UCanAccess is a pure Java JDBC driver implementation that allows Java applications to read and write to
+            Microsoft Access database files without requiring ODBC DSN configuration on Linux or Windows platforms.
+          </p>
+        </section>
+
+        <!-- 4. REQUIREMENTS -->
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title">
+            <span class="section-icon">⚙️</span> 3. System Requirements
+          </h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">🖥️ Hardware Requirements</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Processor: Intel Core i3 / i5 or higher</div>
+                <div class="req-item"><span class="req-item-dot"></span>RAM: 4 GB</div>
+                <div class="req-item"><span class="req-item-dot"></span>Storage: 300 MB free space</div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">💾 Software Requirements</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>OS: Ubuntu / Linux / Windows</div>
+                <div class="req-item"><span class="req-item-dot"></span>JDK: Java SE 8+</div>
+                <div class="req-item"><span class="req-item-dot"></span>JDBC Driver: ucanaccess-5.1.3.jar &amp;
+                  dependencies</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. PROCEDURE -->
+        <section class="content-section" id="procedure">
+          <h2 class="content-section-title">
+            <span class="section-icon">🔧</span> 4. Step-by-Step Procedure
+          </h2>
+
+          <div class="timeline-procedure">
+
+            <!-- Step 1 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div class="timeline-icon">📁</div>
+                  <div class="timeline-title">Create Directory &amp; Download JARs</div>
+                </div>
+                <div class="timeline-desc">Run
+                  <code>mkdir ~/Downloads/ucanaccess &amp;&amp; cd ~/Downloads/ucanaccess</code> and download UCanAccess
+                  driver JAR files.</div>
+                <div class="timeline-step-img ss-img-wrap" data-title="Directory & JAR Download">
+                  <span class="upload-icon">🖼️</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted)">Step 1 Screenshot Placeholder — Click to
+                    Zoom</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div class="timeline-icon">📝</div>
+                  <div class="timeline-title">Write AccessDemo.java Code</div>
+                </div>
+                <div class="timeline-desc">Run <code>nano AccessDemo.java</code>, write connection code to
+                  <code>ucanaccess://</code> database path, save and exit.</div>
+                <div class="timeline-step-img ss-img-wrap" data-title="Writing AccessDemo.java">
+                  <span class="upload-icon">🖼️</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted)">Step 2 Screenshot Placeholder — Click to
+                    Zoom</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div class="timeline-icon">⚙️</div>
+                  <div class="timeline-title">Compile AccessDemo.java</div>
+                </div>
+                <div class="timeline-desc">Run <code>javac AccessDemo.java</code> to generate
+                  <code>AccessDemo.class</code> file without compilation errors.</div>
+                <div class="timeline-step-img ss-img-wrap" data-title="Compiling AccessDemo.java">
+                  <span class="upload-icon">🖼️</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted)">Step 3 Screenshot Placeholder — Click to
+                    Zoom</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div class="timeline-icon">🔗</div>
+                  <div class="timeline-title">Set CLASSPATH &amp; Execute</div>
+                </div>
+                <div class="timeline-desc">Export CLASSPATH and run
+                  <code>java -cp ".:ucanaccess-5.1.2-uber.jar" AccessDemo</code>.</div>
+                <div class="timeline-step-img ss-img-wrap" data-title="Executing AccessDemo">
+                  <span class="upload-icon">🖼️</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted)">Step 4 Screenshot Placeholder — Click to
+                    Zoom</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="timeline-step">
+              <div class="timeline-marker">5</div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <div class="timeline-icon">✅</div>
+                  <div class="timeline-title">Verify Terminal Output</div>
+                </div>
+                <div class="timeline-desc">Verify printed output:
+                  <code>Connected Successfully \n 1 RAMESH 10 \n 2 MAHESH 20 \n 3 SURESH 30 \n 4 RAJESH 40</code>.</div>
+                <div class="timeline-step-img ss-img-wrap" data-title="Verified Terminal Output">
+                  <span class="upload-icon">🖼️</span>
+                  <span style="font-size:0.78rem;color:var(--text-muted)">Step 5 Screenshot Placeholder — Click to
+                    Zoom</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 6. JAVA PROGRAM -->
+        <section class="content-section" id="program">
+          <h2 class="content-section-title">
+            <span class="section-icon">💻</span> 5. Java Program
+          </h2>
+
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-tab-icon">☕</span> Source Code</div>
+              <span class="editor-filename">AccessDemo.java</span>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="AccessDemo.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <div class="line-numbers" aria-hidden="true">
+                1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24
+              </div>
+              <pre><code><span class="kw">import</span> <span class="pk">java.sql.*</span>;
+
+<span class="kw">public class</span> <span class="ty">AccessDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="ty">String</span>[] args) {
+        <span class="kw">try</span> {
+            <span class="ty">Class</span>.<span class="fn">forName</span>(<span class="str">"net.ucanaccess.jdbc.UcanaccessDriver"</span>);
+            <span class="ty">String</span> url = <span class="str">"jdbc:ucanaccess://StudentDB.accdb"</span>;
+            <span class="ty">Connection</span> con = <span class="ty">DriverManager</span>.<span class="fn">getConnection</span>(url);
+
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Connected Successfully"</span>);
+
+            <span class="ty">Statement</span> st = con.<span class="fn">createStatement</span>();
+            <span class="ty">ResultSet</span> rs = st.<span class="fn">executeQuery</span>(<span class="str">"SELECT * FROM Student"</span>);
+
+            <span class="kw">while</span> (rs.<span class="fn">next</span>()) {
+                <span class="ty">System</span>.out.<span class="fn">println</span>(rs.<span class="fn">getInt</span>(1) + <span class="str">" "</span> + rs.<span class="fn">getString</span>(2) + <span class="str">" "</span> + rs.<span class="fn">getInt</span>(3));
+            }
+            con.<span class="fn">close</span>();
+        } <span class="kw">catch</span> (<span class="ty">Exception</span> e) {
+            <span class="ty">System</span>.out.<span class="fn">println</span>(e);
+        }
+    }
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. PROGRAM EXPLANATION -->
+        <section class="content-section" id="explanation">
+          <h2 class="content-section-title">
+            <span class="section-icon">📝</span> 6. Program Explanation
+          </h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Code Line</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Load Driver</td>
+                  <td><code>Class.forName("net.ucanaccess.jdbc.UcanaccessDriver")</code></td>
+                  <td>Registers UCanAccess JDBC driver.</td>
+                </tr>
+                <tr>
+                  <td>Connect URL</td>
+                  <td><code>jdbc:ucanaccess://StudentDB.accdb</code></td>
+                  <td>Connects directly to MS Access database file.</td>
+                </tr>
+                <tr>
+                  <td>Query Execution</td>
+                  <td><code>st.executeQuery("SELECT * FROM Student")</code></td>
+                  <td>Retrieves student ID, Name, and Marks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 8. EXPECTED OUTPUT (TERMINAL WINDOW FROM LAB PDF) -->
+        <section class="content-section" id="output">
+          <h2 class="content-section-title">
+            <span class="section-icon">📟</span> 7. Expected Output (Linux Terminal Window)
+          </h2>
+
+          <div class="netbeans-output">
+            <div class="netbeans-header">
+              <div class="netbeans-tabs">
+                <div class="netbeans-tab">
+                  <span class="netbeans-tab-icon">🐧</span> student@ITLAB3-1:~/Downloads/ucanaccess
+                </div>
+              </div>
+              <div class="netbeans-actions">
+                <span class="nb-status-badge">SUCCESS</span>
+              </div>
+            </div>
+            <div class="netbeans-body"><span class="nb-line-run">student@ITLAB3-1:~/Downloads/ucanaccess$ java -cp
+                ".:ucanaccess-5.1.2-uber.jar" AccessDemo</span>
+              <span class="nb-line-info">Connected Successfully</span>
+              <span class="nb-line-out">1 RAMESH 10</span>
+              <span class="nb-line-out">2 MAHESH 20</span>
+              <span class="nb-line-out">3 SURESH 30</span>
+              <span class="nb-line-out">4 RAJESH 40</span>
+              <span class="nb-line-run">student@ITLAB3-1:~/Downloads/ucanaccess$</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. SCREENSHOT GALLERY (10 PREMIUM CARDS) -->
+        <section class="content-section" id="screenshots">
+          <div class="gallery-section-header">
+            <h2 class="content-section-title mb-0" style="border-bottom:none;padding-bottom:0">
+              <span class="section-icon">🖼️</span> 8. Screenshot Gallery (10 Cards)
+            </h2>
+            <span class="badge badge-purple">10 Record Screenshots</span>
+          </div>
+          <p>Interactive lab record screenshots. Click <strong>Replace Image</strong> to upload your own lab screenshot
+            file, or click <strong>Zoom</strong> to view fullscreen.</p>
+
+          <div class="gallery-grid">
+
+            <!-- Card 1 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 01</span><span class="ss-counter-badge">[1 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="mkdir ~/Downloads/ucanaccess Terminal Command">
+                <div class="ss-placeholder-inner"><span class="icon">📁</span><span class="title">mkdir
+                    ucanaccess</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Creating Directory</div>
+                <div class="ss-subcaption">mkdir ~/Downloads/ucanaccess in terminal.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 02</span><span class="ss-counter-badge">[2 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="Downloading ucanaccess-5.1.3.jar via wget">
+                <div class="ss-placeholder-inner"><span class="icon">⬇️</span><span class="title">wget ucanaccess
+                    JAR</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Downloading Driver JARs</div>
+                <div class="ss-subcaption">wget ucanaccess, jackcess, hsqldb JARs.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 03</span><span class="ss-counter-badge">[3 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="nano AccessDemo.java Code Editor">
+                <div class="ss-placeholder-inner"><span class="icon">📝</span><span class="title">nano
+                    AccessDemo.java</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Writing AccessDemo.java</div>
+                <div class="ss-subcaption">Writing Java program using nano text editor.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 04</span><span class="ss-counter-badge">[4 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="javac AccessDemo.java Compilation">
+                <div class="ss-placeholder-inner"><span class="icon">⚙️</span><span class="title">javac
+                    AccessDemo.java</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Compiling Java Code</div>
+                <div class="ss-subcaption">Compiling program with zero errors.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 05</span><span class="ss-counter-badge">[5 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="Terminal Output: Connected Successfully">
+                <div class="ss-placeholder-inner"><span class="icon">✅</span><span class="title">Connected
+                    Successfully</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Terminal Output</div>
+                <div class="ss-subcaption">Output: Connected Successfully \n 1 RAMESH 10 ...</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 06</span><span class="ss-counter-badge">[6 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="export CLASSPATH Command">
+                <div class="ss-placeholder-inner"><span class="icon">🔗</span><span class="title">export
+                    CLASSPATH</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Setting CLASSPATH</div>
+                <div class="ss-subcaption">Exporting CLASSPATH to include ucanaccess.jar.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 07</span><span class="ss-counter-badge">[7 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="StudentDB.accdb File Placement">
+                <div class="ss-placeholder-inner"><span class="icon">🗂️</span><span class="title">StudentDB.accdb
+                    File</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">MS Access File Placement</div>
+                <div class="ss-subcaption">Placing StudentDB.accdb in ucanaccess folder.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 08</span><span class="ss-counter-badge">[8 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="Executing java -cp AccessDemo">
+                <div class="ss-placeholder-inner"><span class="icon">🚀</span><span class="title">Executing
+                    AccessDemo</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Executing Java Command</div>
+                <div class="ss-subcaption">java -cp ".:ucanaccess-5.1.2-uber.jar" AccessDemo.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 09</span><span class="ss-counter-badge">[9 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="Listing Directory Contents via ls">
+                <div class="ss-placeholder-inner"><span class="icon">📄</span><span class="title">ls Command
+                    Output</span></div>
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Directory Verification</div>
+                <div class="ss-subcaption">Listing downloaded JARs and AccessDemo.class.</div>
+                
+              </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Step 10</span><span class="ss-counter-badge">[10 /
+                  10]</span></div>
+              <div class="ss-img-wrap" data-title="Verified NetBeans / Terminal Output Records">
+                <img src="../assets/images/pdf-imports/java_pooja_img_6.png" alt="Verified NetBeans / Terminal Output Records" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom</div>
+              </div>
+              <div class="ss-card-body">
+                <div class="ss-caption">Verified Output Result</div>
+                <div class="ss-subcaption">Printed records 1 RAMESH, 2 MAHESH, 3 SURESH, 4 RAJESH.</div>
+                
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 10. RESULT -->
+        <section class="content-section" id="result">
+          <h2 class="content-section-title">
+            <span class="section-icon">✅</span> 9. Result
+          </h2>
+          <p>
+            The Java program to connect to Microsoft Access database (<code>StudentDB.accdb</code>) using UCanAccess
+            JDBC driver was successfully executed in Linux terminal.
+          </p>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✓</span><span>Connected to MS Access DB via UCanAccess</span>
+            </div>
+            <div class="outcome-item"><span class="check">✓</span><span>Fetched Records: 1 RAMESH 10, 2 MAHESH 20, 3
+                SURESH 30, 4 RAJESH 40</span></div>
+            <div class="outcome-item"><span class="check">✓</span><span>Verified Output in Linux Terminal Prompt</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE NAV -->
+        <div class="topic-page-nav">
+          <a href="../index.html#topics" class="topic-page-nav-btn prev">
+            <span>←</span>
+            <div>
+              <div class="nav-btn-sub">Back to</div>
+              <div class="nav-btn-title">All Topics</div>
+            </div>
+          </a>
+          <a href="mysql.html" class="topic-page-nav-btn">
+            <div style="text-align:right">
+              <div class="nav-btn-sub">Next Experiment</div>
+              <div class="nav-btn-title">Java MySQL →</div>
+            </div>
+            <span>→</span>
+          </a>
+        </div>
+
+      </article>
+    </div>
+
+  </main>
+
+  <!-- ZOOM MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <span class="modal-close" title="Close Modal">&times;</span>
+      <img src="" alt="Zoomed Screenshot" class="modal-img" />
+      <div class="modal-caption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../script.js"></script>
+</body>
+
+</html>

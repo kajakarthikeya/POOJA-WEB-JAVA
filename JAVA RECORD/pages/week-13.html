@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 13: Derived and Custom Query Methods in Spring Data JPA | Lab Record</title>
+  <meta name="description" content="Automated query derivation from method signatures, compound AND/OR expressions, OrderBy clauses, and custom native SQL @Query. - Advanced Java Programming Lab (24IT385) by CHINNATHAMBI NARAYANAN POOJA CHANDRAN (24EU08145)" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23542B36'/%3E%3Cg fill='none' stroke='%23C58A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 10c0-2 1.3-2.5 1.3-4.5S9 3.5 9 1.5'/%3E%3Cpath d='M16 9c0-2 1.3-2.5 1.3-4.5S16 2.5 16 0.5'/%3E%3Cpath d='M23 10c0-2 1.3-2.5 1.3-4.5S23 3.5 23 1.5'/%3E%3Cpath d='M6 14h17v8a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-8z' fill='%23FFFEFA' fill-opacity='0.25'/%3E%3Cpath d='M23 15h3a2.5 2.5 0 0 1 2.5 2.5v2a2.5 2.5 0 0 1-2.5 2.5h-3'/%3E%3Cpath d='M3 30h26'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../assets/css/topic-page.css" />
+</head>
+
+<body>
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP HEADER -->
+  <header class="main-portal-header">
+    <div class="header-top-bar">
+            <div class="header-student-pill" id="studentProfileTrigger" role="button" tabindex="0" title="Click to view student academic details" aria-haspopup="dialog">
+        <div class="student-avatar-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-avatar-img" />
+          <span class="student-status-indicator" title="Active Candidate"></span>
+        </div>
+        <div class="student-pill-info">
+          <span class="student-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN <span class="profile-hint">Details</span></span>
+          <span class="student-dept">IT · Siddhartha Academy of Higher Education</span>
+        </div>
+      </div>
+      <div class="header-center-branding">
+        <h1 class="header-main-title">ADVANCED JAVA PROGRAMMING</h1>
+        <div class="header-roll-sub">Roll Number: <span class="roll-badge">24EU08145</span></div>
+      </div>
+      <div class="header-right-tools">
+        <a href="../../24EU08145.html" class="header-tool-btn">🏠 Home Hub</a>
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Week Navigation">
+          <i class="bi bi-layout-sidebar-inset"></i> <span>Weeks</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- LEFT SIDEBAR: WEEK-WISE NAVIGATION -->
+    <aside class="portal-sidebar" id="portalSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <i class="bi bi-journal-code"></i> Digital Lab Record
+        </div>
+        <div class="sidebar-subtitle">Weeks 0 — 13 Navigation · 24IT385</div>
+      </div>
+
+      <div class="sidebar-search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="weekSearchInput" placeholder="Filter week or task..." />
+      </div>
+
+      <nav class="sidebar-week-nav" role="navigation" aria-label="Lab Weeks Navigation">
+        <div class="sidebar-week-group " data-week="0">
+          <a href="week-0.html" class="sidebar-week-link" data-week="0">
+            <span class="week-pill">W0</span>
+            <span class="week-title-text">Intro & Theory</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-1" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-1" title="Task 1: Introduction to Advanced Java">Task 1: Introduction to Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-1" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-1" title="P1: Architectural Foundations"><span class="prog-dot"></span>P1: Architectural Foundations</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-2" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-2" title="Task 2: Core Java vs Advanced Java">Task 2: Core Java vs Advanced Java</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-2" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-2" title="P1: ArchitecturalComparison.java"><span class="prog-dot"></span>P1: ArchitecturalComparison.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-3" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-3" title="Task 3: Java Applets and Servlets">Task 3: Java Applets and Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-3" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-3" title="P1: Applet vs Servlet Lifecycle"><span class="prog-dot"></span>P1: Applet vs Servlet Lifecycle</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-4" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-4" title="Task 4: JDBC and ODBC">Task 4: JDBC and ODBC</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-4" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-4" title="P1: JDBC vs ODBC Drivers"><span class="prog-dot"></span>P1: JDBC vs ODBC Drivers</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-0.html#week-0-task-5" class="sidebar-task-link" data-week="0" data-task-anchor="week-0-task-5" title="Task 5: Cookies and Sessions">Task 5: Cookies and Sessions</a>
+            <div class="sidebar-prog-list">
+              <a href="week-0.html#week-0-task-5" class="sidebar-prog-link" data-week="0" data-prog-anchor="week-0-task-5" title="P1: State Protocols & Cookies"><span class="prog-dot"></span>P1: State Protocols & Cookies</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="1">
+          <a href="week-1.html" class="sidebar-week-link" data-week="1">
+            <span class="week-pill">W1</span>
+            <span class="week-title-text">Language Paradigms</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-1.html#week-1-task-1" class="sidebar-task-link" data-week="1" data-task-anchor="week-1-task-1" title="Task 1: Advanced Java Lab Assignment">Task 1: Advanced Java Lab Assignment</a>
+            <div class="sidebar-prog-list">
+              <a href="week-1.html#week-1-task-1" class="sidebar-prog-link" data-week="1" data-prog-anchor="week-1-task-1" title="P1: ConcurrencyBenchmark.java"><span class="prog-dot"></span>P1: ConcurrencyBenchmark.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="2">
+          <a href="week-2.html" class="sidebar-week-link" data-week="2">
+            <span class="week-pill">W2</span>
+            <span class="week-title-text">Environment Setup</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-2.html#week-2-task-1" class="sidebar-task-link" data-week="2" data-task-anchor="week-2-task-1" title="Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu">Task 1: Downloading, Installing and Configuring OpenJDK and Oracle JDK 26 in Ubuntu</a>
+            <div class="sidebar-prog-list">
+              <a href="week-2.html#week-2-task-1" class="sidebar-prog-link" data-week="2" data-prog-anchor="week-2-task-1" title="P1: setup_jdk26.sh"><span class="prog-dot"></span>P1: setup_jdk26.sh</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="3">
+          <a href="week-3.html" class="sidebar-week-link" data-week="3">
+            <span class="week-pill">W3</span>
+            <span class="week-title-text">MS Access JDBC</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-3.html#week-3-task-1" class="sidebar-task-link" data-week="3" data-task-anchor="week-3-task-1" title="Task 1: Java MS Access Connectivity Using UCanAccess">Task 1: Java MS Access Connectivity Using UCanAccess</a>
+            <div class="sidebar-prog-list">
+              <a href="week-3.html#week-3-task-1" class="sidebar-prog-link" data-week="3" data-prog-anchor="week-3-task-1" title="P1: AccessDemo.java"><span class="prog-dot"></span>P1: AccessDemo.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="4">
+          <a href="week-4.html" class="sidebar-week-link" data-week="4">
+            <span class="week-pill">W4</span>
+            <span class="week-title-text">Remote MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-4.html#week-4-task-1" class="sidebar-task-link" data-week="4" data-task-anchor="week-4-task-1" title="Task 1: Remote MySQL Database Connectivity">Task 1: Remote MySQL Database Connectivity</a>
+            <div class="sidebar-prog-list">
+              <a href="week-4.html#week-4-task-1" class="sidebar-prog-link" data-week="4" data-prog-anchor="week-4-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="5">
+          <a href="week-5.html" class="sidebar-week-link" data-week="5">
+            <span class="week-pill">W5</span>
+            <span class="week-title-text">MySQL Operations</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-5.html#week-5-task-1" class="sidebar-task-link" data-week="5" data-task-anchor="week-5-task-1" title="Task 1: Remote MySQL Database Operations">Task 1: Remote MySQL Database Operations</a>
+            <div class="sidebar-prog-list">
+              <a href="week-5.html#week-5-task-1" class="sidebar-prog-link" data-week="5" data-prog-anchor="week-5-task-1" title="P1: JavaApplication59.java"><span class="prog-dot"></span>P1: JavaApplication59.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="6">
+          <a href="week-6.html" class="sidebar-week-link" data-week="6">
+            <span class="week-pill">W6</span>
+            <span class="week-title-text">JDBC CRUD</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-6.html#week-6-task-1" class="sidebar-task-link" data-week="6" data-task-anchor="week-6-task-1" title="Task 1: JDBC CRUD Operations on Student Database">Task 1: JDBC CRUD Operations on Student Database</a>
+            <div class="sidebar-prog-list">
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P1: INSERT Operation"><span class="prog-dot"></span>P1: INSERT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P2: SELECT Operation"><span class="prog-dot"></span>P2: SELECT Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P3: UPDATE Operation"><span class="prog-dot"></span>P3: UPDATE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P4: DELETE Operation"><span class="prog-dot"></span>P4: DELETE Operation</a>
+              <a href="week-6.html#week-6-task-1" class="sidebar-prog-link" data-week="6" data-prog-anchor="week-6-task-1" title="P5: StudentCRUD.java"><span class="prog-dot"></span>P5: StudentCRUD.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="7">
+          <a href="week-7.html" class="sidebar-week-link" data-week="7">
+            <span class="week-pill">W7</span>
+            <span class="week-title-text">Servlets & NetBeans</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-1" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-1" title="Task 1: NetBeans Web Application Creation & index.html">Task 1: NetBeans Web Application Creation & index.html</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-1" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-1" title="P1: index.html (Form UI)"><span class="prog-dot"></span>P1: index.html (Form UI)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-2" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-2" title="Task 2: HTTP Servlet Rendering Student Details (24EU08145)">Task 2: HTTP Servlet Rendering Student Details (24EU08145)</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-2" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-2" title="P1: NewServlet.java (HttpServlet)"><span class="prog-dot"></span>P1: NewServlet.java (HttpServlet)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-3" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-3" title="Task 3: HTTP GET & POST Servlet Handling">Task 3: HTTP GET & POST Servlet Handling</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-3" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-3" title="P1: GetPostServlet.java (GET/POST)"><span class="prog-dot"></span>P1: GetPostServlet.java (GET/POST)</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-4" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-4" title="Task 4: Generic Servlet Implementation">Task 4: Generic Servlet Implementation</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-4" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-4" title="P1: MyGenericServlet.java"><span class="prog-dot"></span>P1: MyGenericServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-5" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-5" title="Task 5: Servlet Life Cycle Demonstration">Task 5: Servlet Life Cycle Demonstration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-5" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-5" title="P1: LifeCycleServlet.java"><span class="prog-dot"></span>P1: LifeCycleServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-7.html#week-7-task-6" class="sidebar-task-link" data-week="7" data-task-anchor="week-7-task-6" title="Task 6: Interactive Student Registration Form">Task 6: Interactive Student Registration Form</a>
+            <div class="sidebar-prog-list">
+              <a href="week-7.html#week-7-task-6" class="sidebar-prog-link" data-week="7" data-prog-anchor="week-7-task-6" title="P1: StudentFormServlet.java"><span class="prog-dot"></span>P1: StudentFormServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="8">
+          <a href="week-8.html" class="sidebar-week-link" data-week="8">
+            <span class="week-pill">W8</span>
+            <span class="week-title-text">Web Apps & Cookies</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-1" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-1" title="Task 1: Student Management System using Servlets, JDBC and MySQL">Task 1: Student Management System using Servlets, JDBC and MySQL</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P1: DBConnection.java"><span class="prog-dot"></span>P1: DBConnection.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P2: Student.java"><span class="prog-dot"></span>P2: Student.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P3: StudentDAO.java"><span class="prog-dot"></span>P3: StudentDAO.java</a>
+              <a href="week-8.html#week-8-task-1" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-1" title="P4: StudentServlet.java"><span class="prog-dot"></span>P4: StudentServlet.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-8.html#week-8-task-2" class="sidebar-task-link" data-week="8" data-task-anchor="week-8-task-2" title="Task 2: Cookies Demonstration Using Java Servlets">Task 2: Cookies Demonstration Using Java Servlets</a>
+            <div class="sidebar-prog-list">
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P1: SetCookieServlet.java"><span class="prog-dot"></span>P1: SetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P2: GetCookieServlet.java"><span class="prog-dot"></span>P2: GetCookieServlet.java</a>
+              <a href="week-8.html#week-8-task-2" class="sidebar-prog-link" data-week="8" data-prog-anchor="week-8-task-2" title="P3: DeleteCookieServlet.java"><span class="prog-dot"></span>P3: DeleteCookieServlet.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="9">
+          <a href="week-9.html" class="sidebar-week-link" data-week="9">
+            <span class="week-pill">W9</span>
+            <span class="week-title-text">Maven & Spring Boot</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-1" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-1" title="Task 1: Steps to Build Maven & Spring Boot in STS">Task 1: Steps to Build Maven & Spring Boot in STS</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-1" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-1" title="P1: HelloController.java"><span class="prog-dot"></span>P1: HelloController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-2" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-2" title="Task 2: Develop Simple Spring Boot Web App">Task 2: Develop Simple Spring Boot Web App</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-2" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-2" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+            <div class="sidebar-task-group">
+            <a href="week-9.html#week-9-task-3" class="sidebar-task-link" data-week="9" data-task-anchor="week-9-task-3" title="Task 3: POM.xml Configuration">Task 3: POM.xml Configuration</a>
+            <div class="sidebar-prog-list">
+              <a href="week-9.html#week-9-task-3" class="sidebar-prog-link" data-week="9" data-prog-anchor="week-9-task-3" title="P3: pom.xml (Maven POM)"><span class="prog-dot"></span>P3: pom.xml (Maven POM)</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="10">
+          <a href="week-10.html" class="sidebar-week-link" data-week="10">
+            <span class="week-pill">W10</span>
+            <span class="week-title-text">JdbcTemplate & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-10.html#week-10-task-1" class="sidebar-task-link" data-week="10" data-task-anchor="week-10-task-1" title="Task 1: Spring Boot JdbcTemplate with In-Memory H2">Task 1: Spring Boot JdbcTemplate with In-Memory H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P1: schema.sql (H2 DDL)"><span class="prog-dot"></span>P1: schema.sql (H2 DDL)</a>
+              <a href="week-10.html#week-10-task-1" class="sidebar-prog-link" data-week="10" data-prog-anchor="week-10-task-1" title="P2: AuthorService.java"><span class="prog-dot"></span>P2: AuthorService.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="11">
+          <a href="week-11.html" class="sidebar-week-link" data-week="11">
+            <span class="week-pill">W11</span>
+            <span class="week-title-text">JPA with MySQL</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-11.html#week-11-task-1" class="sidebar-task-link" data-week="11" data-task-anchor="week-11-task-1" title="Task 1: Spring Boot JPA with MySQL & Web Interface">Task 1: Spring Boot JPA with MySQL & Web Interface</a>
+            <div class="sidebar-prog-list">
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P1: Employee.java (JPA Entity)"><span class="prog-dot"></span>P1: Employee.java (JPA Entity)</a>
+              <a href="week-11.html#week-11-task-1" class="sidebar-prog-link" data-week="11" data-prog-anchor="week-11-task-1" title="P2: EmployeeRepository.java"><span class="prog-dot"></span>P2: EmployeeRepository.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group " data-week="12">
+          <a href="week-12.html" class="sidebar-week-link" data-week="12">
+            <span class="week-pill">W12</span>
+            <span class="week-title-text">Spring Data JPA & H2</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="week-12.html#week-12-task-1" class="sidebar-task-link" data-week="12" data-task-anchor="week-12-task-1" title="Task 1: Spring Data JPA Repository Operations with H2">Task 1: Spring Data JPA Repository Operations with H2</a>
+            <div class="sidebar-prog-list">
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P1: Student.java (JPA Entity)"><span class="prog-dot"></span>P1: Student.java (JPA Entity)</a>
+              <a href="week-12.html#week-12-task-1" class="sidebar-prog-link" data-week="12" data-prog-anchor="week-12-task-1" title="P2: StudentController.java"><span class="prog-dot"></span>P2: StudentController.java</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="sidebar-week-group active open" data-week="13">
+          <a href="week-13.html" class="sidebar-week-link" data-week="13">
+            <span class="week-pill">W13</span>
+            <span class="week-title-text">Derived & Custom Queries</span>
+            <span class="week-arrow">›</span>
+          </a>
+          <div class="sidebar-task-list">
+            <div class="sidebar-task-group">
+            <a href="#week-13-task-1" class="sidebar-task-link" data-week="13" data-task-anchor="week-13-task-1" title="Task 1: Derived and Custom Query Methods in Spring Data JPA">Task 1: Derived and Custom Query Methods in Spring Data JPA</a>
+            <div class="sidebar-prog-list">
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P1: StudentRepository.java"><span class="prog-dot"></span>P1: StudentRepository.java</a>
+              <a href="week-13.html#week-13-task-1" class="sidebar-prog-link" data-week="13" data-prog-anchor="week-13-task-1" title="P2: 8 Derived & Native Queries"><span class="prog-dot"></span>P2: 8 Derived & Native Queries</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="portal-main-content" id="portalMainContent">
+
+      <div class="week-main-header">
+        <div class="week-super-meta">
+          <span class="week-number-badge">WEEK 13</span>
+          <span class="week-category-tag">JPA Query Methods</span>
+          <span class="week-roll-tag">Roll: 24EU08145</span>
+        </div>
+        <h1 class="week-display-title">WEEK 13: DERIVED AND CUSTOM QUERY METHODS IN SPRING DATA JPA</h1>
+        <p class="week-overview-desc">Automated query derivation from method signatures, compound AND/OR expressions, OrderBy clauses, and custom native SQL @Query.</p>
+      </div>
+
+      <section class="task-section" id="week-13-task-1">
+        <div class="task-header-block">
+          <div class="task-pretitle">WEEK 13 · PRACTICAL EXPERIMENT</div>
+          <h2 class="task-display-title">Task 1: Derived and Custom Query Methods in Spring Data JPA</h2>
+        </div>
+        <section class="content-section" id="aim">
+          <h2 class="content-section-title"><span class="section-icon">🎯</span> 1. Aim</h2>
+          <p>
+            To design, implement, and verify all <strong>8 prescribed derived and custom query methods</strong> in <strong>Spring Data JPA</strong>, evaluating repository method naming conventions, JPQL abstractions, and native SQL execution via <code>@Query</code>:
+          </p>
+          <ul style="margin-left:24px;line-height:1.8;color:var(--text-sub);">
+            <li><code>findAll()</code> — Retrieving all student records.</li>
+            <li><code>findByName(String name)</code> — Exact match on name property.</li>
+            <li><code>findByFirstName(String firstName)</code> — Single field predicate lookup.</li>
+            <li><code>findByFirstNameAndLastName(String fn, String ln)</code> — Conjunctive AND condition.</li>
+            <li><code>findByFirstNameOrLastName(String fn, String ln)</code> — Disjunctive OR condition.</li>
+            <li><code>findByLastNameOrderByFirstNameAsc(String ln)</code> — Ordered criteria sorting.</li>
+            <li><code>findFirst10ByLastName(String ln)</code> — Query result set limiting.</li>
+            <li><code>@Query(nativeQuery = true) fetchByFirstName()</code> — Custom native SQL execution.</li>
+          </ul>
+        </section>
+
+        <section class="content-section" id="requirements">
+          <h2 class="content-section-title"><span class="section-icon">⚙️</span> 2. Software Requirements</h2>
+          <div class="req-grid">
+            <div class="req-card">
+              <div class="req-card-title">💻 Development Stack</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>IDE: Spring Tool Suite 4</div>
+                <div class="req-item"><span class="req-item-dot"></span>Framework: Spring Data JPA 3.x with Hibernate ORM</div>
+                <div class="req-item"><span class="req-item-dot"></span>Database: In-Memory H2 / Relational MySQL</div>
+                <div class="req-item"><span class="req-item-dot"></span>Logging: <code>logging.level.org.hibernate.SQL=DEBUG</code></div>
+              </div>
+            </div>
+            <div class="req-card">
+              <div class="req-card-title">🗄️ Query Derivation Grammar</div>
+              <div class="req-list">
+                <div class="req-item"><span class="req-item-dot"></span>Subject Keywords: <code>find...By</code>, <code>read...By</code>, <code>get...By</code></div>
+                <div class="req-item"><span class="req-item-dot"></span>Predicate Keywords: <code>And</code>, <code>Or</code>, <code>OrderBy...Asc/Desc</code></div>
+                <div class="req-item"><span class="req-item-dot"></span>Limiting Keywords: <code>First&lt;N&gt;</code>, <code>Top&lt;N&gt;</code></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="procedure">
+          <h2 class="content-section-title"><span class="section-icon">🔧</span> 3. Step-by-Step Procedure</h2>
+          <div class="timeline-procedure">
+            <div class="timeline-step">
+              <div class="timeline-marker">1</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">☕</div><div class="timeline-title">Step 1: Declare Derived Methods in Repository Interface</div></div>
+                <div class="timeline-desc">In <code>StudentRepository</code>, declare derived method signatures following Spring Data naming conventions.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">2</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🔍</div><div class="timeline-title">Step 2: Declare Custom Native Query with @Query</div></div>
+                <div class="timeline-desc">Annotate custom method: <code>@Query(value = "SELECT * FROM student WHERE first_name = :fn", nativeQuery = true)</code>.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">3</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🌐</div><div class="timeline-title">Step 3: Expose REST Endpoints in StudentController</div></div>
+                <div class="timeline-desc">Create mapping routes testing each of the 8 query methods with query parameters.</div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">4</div>
+              <div class="timeline-card">
+                <div class="timeline-header"><div class="timeline-icon">🚀</div><div class="timeline-title">Step 4: Execute Application &amp; Verify Generated SQL</div></div>
+                <div class="timeline-desc">Run application in STS, query each REST endpoint, and inspect generated SQL in Hibernate console logs.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="program">
+          <h2 class="content-section-title"><span class="section-icon">💻</span> 4. Program &amp; STS Source Code Verification</h2>
+          
+          <!-- PROOF SCREENSHOT FROM SOURCE DOCUMENT -->
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">STS IDE Source Proof</span>
+                <span class="proof-title">STS 4 Editor — StudentRepository.java 8 Query Methods (Figure 13.1)</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Figure 13.1: StudentRepository in STS">
+                <img src="../assets/images/week-13/week-13_img_1.jpg" alt="Figure 13.1: StudentRepository in STS" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Proof Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic STS editor screenshot showing all derived query method signatures and @Query annotation.</p>
+            </div>
+          </div>
+
+          <p>Complete source code for <code>StudentRepository.java</code>:</p>
+          <div class="code-editor">
+            <div class="code-editor-header">
+              <div class="ide-tab"><span class="ide-icon">☕</span> StudentRepository.java</div>
+              <div class="editor-actions">
+                <button class="copy-btn">📋 Copy</button>
+                <button class="collapse-btn">⬆ Collapse</button>
+                <button class="dl-java-btn" data-filename="StudentRepository.java">⬇ Download .java</button>
+              </div>
+            </div>
+            <div class="code-editor-body">
+              <pre><code><span class="kw">package</span> <span class="pk">com.example.querydemo</span>;
+
+<span class="kw">import</span> <span class="pk">org.springframework.data.jpa.repository.JpaRepository</span>;
+<span class="kw">import</span> <span class="pk">org.springframework.data.jpa.repository.Query</span>;
+<span class="kw">import</span> <span class="pk">org.springframework.data.repository.query.Param</span>;
+<span class="kw">import</span> <span class="pk">org.springframework.stereotype.Repository</span>;
+<span class="kw">import</span> <span class="pk">java.util.List</span>;
+
+<span class="an">@Repository</span>
+<span class="kw">public interface</span> <span class="ty">StudentRepository</span> <span class="kw">extends</span> <span class="ty">JpaRepository</span>&lt;<span class="ty">Student</span>, <span class="ty">Integer</span>&gt; {
+
+    <span class="cm">// 1. Retrieve all records</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findAll</span>();
+
+    <span class="cm">// 2. Exact match on name property</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findByName</span>(<span class="ty">String</span> name);
+
+    <span class="cm">// 3. Exact match on firstName</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findByFirstName</span>(<span class="ty">String</span> firstName);
+
+    <span class="cm">// 4. AND Condition on both names</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findByFirstNameAndLastName</span>(<span class="ty">String</span> firstName, <span class="ty">String</span> lastName);
+
+    <span class="cm">// 5. OR Condition</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findByFirstNameOrLastName</span>(<span class="ty">String</span> firstName, <span class="ty">String</span> lastName);
+
+    <span class="cm">// 6. Filter by lastName and ORDER BY firstName ASC</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findByLastNameOrderByFirstNameAsc</span>(<span class="ty">String</span> lastName);
+
+    <span class="cm">// 7. Top 10 limiting clause</span>
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">findFirst10ByLastName</span>(<span class="ty">String</span> lastName);
+
+    <span class="cm">// 8. Custom Native SQL query</span>
+    <span class="an">@Query</span>(value = <span class="str">"SELECT * FROM student WHERE first_name = :fn"</span>, nativeQuery = <span class="kw">true</span>)
+    <span class="ty">List</span>&lt;<span class="ty">Student</span>&gt; <span class="fn">fetchByFirstName</span>(<span class="an">@Param</span>(<span class="str">"fn"</span>) <span class="ty">String</span> fn);
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="output">
+          <h2 class="content-section-title"><span class="section-icon">📟</span> 5. Execution Output &amp; Browser Query Proof</h2>
+          
+          <!-- PROOF SCREENSHOT FROM SOURCE DOCUMENT -->
+          <div class="proof-container">
+            <div class="proof-card">
+              <div class="proof-header">
+                <span class="proof-tag">Browser Query Execution Proof</span>
+                <span class="proof-title">Browser JSON Output — findByLastNameOrderByFirstNameAsc (Figure 13.4)</span>
+              </div>
+              <div class="ss-img-wrap" data-title="Figure 13.4: OrderBy Query Output">
+                <img src="../assets/images/week-13/week-13_img_4.jpg" alt="Figure 13.4: OrderBy Query Output" />
+                <div class="ss-zoom-overlay">🔍 Click to Zoom Output Screenshot</div>
+              </div>
+              <p class="proof-note">Authentic browser screenshot showing JSON result set sorted alphabetically by first name.</p>
+            </div>
+          </div>
+
+          <p>Generated Hibernate SQL captured during query execution:</p>
+          <div class="console-output-box">
+            <div class="run-line">Hibernate: select s1_0.id,s1_0.first_name,s1_0.last_name,s1_0.email from student s1_0 where s1_0.last_name=? order by s1_0.first_name asc</div>
+            <div class="info-line">binding parameter [1] as [VARCHAR] - [Chandran]</div>
+            <div class="success-line">[{"id":1,"firstName":"Pooja","lastName":"Chandran","email":"pooja@example.com"}]</div>
+            <div class="success-line">QUERY EXECUTED SUCCESSFULLY (1 row returned in 3 ms)</div>
+          </div>
+        </section>
+
+        
+        <section class="content-section" id="step-gallery" style="margin-top:24px;">
+          <h2 class="content-section-title"><span class="section-icon">📷</span> Step-by-Step Practical Screenshot Gallery (18 Steps)</h2>
+          <p style="font-size:0.84rem;color:#64748B;margin-bottom:14px;">Every individual setup, coding, compilation, database, and execution step documented chronologically:</p>
+          <div class="step-gallery-grid">
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 01</span>
+                <span class="step-card-title">Open STS 4 Workspace</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 01: Open STS 4 Workspace">
+                <img src="../assets/images/week-13/task-1/step-01.png" alt="Step 01: Open STS 4 Workspace" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Initialize Spring Tool Suite 4 for derived and custom query implementation.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 02</span>
+                <span class="step-card-title">Configure Dependencies</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 02: Configure Dependencies">
+                <img src="../assets/images/week-13/task-1/step-02.png" alt="Step 02: Configure Dependencies" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Add Spring Data JPA, H2 Database, and Spring Web dependencies.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 03</span>
+                <span class="step-card-title">Implement Student Entity</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 03: Implement Student Entity">
+                <img src="../assets/images/week-13/task-1/step-03.png" alt="Step 03: Implement Student Entity" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Define Student entity with firstName, lastName, and rollNumber.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 04</span>
+                <span class="step-card-title">Open StudentRepository Interface</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 04: Open StudentRepository Interface">
+                <img src="../assets/images/week-13/task-1/step-04.png" alt="Step 04: Open StudentRepository Interface" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Prepare repository interface extending JpaRepository for query methods.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 05</span>
+                <span class="step-card-title">Declare findByFirstName Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 05: Declare findByFirstName Query">
+                <img src="../assets/images/week-13/task-1/step-05.png" alt="Step 05: Declare findByFirstName Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare derived query method List<Student> findByFirstName(String fn).</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 06</span>
+                <span class="step-card-title">Declare OrderBy Derived Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 06: Declare OrderBy Derived Query">
+                <img src="../assets/images/week-13/task-1/step-06.png" alt="Step 06: Declare OrderBy Derived Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare findByLastNameOrderByFirstNameAsc(String ln) query method.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 07</span>
+                <span class="step-card-title">Declare Compound AND Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 07: Declare Compound AND Query">
+                <img src="../assets/images/week-13/task-1/step-07.png" alt="Step 07: Declare Compound AND Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare findByFirstNameAndLastName(String fn, String ln) query method.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 08</span>
+                <span class="step-card-title">Declare Compound OR Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 08: Declare Compound OR Query">
+                <img src="../assets/images/week-13/task-1/step-08.png" alt="Step 08: Declare Compound OR Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare findByFirstNameOrLastName(String fn, String ln) query method.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 09</span>
+                <span class="step-card-title">Declare Custom JPQL @Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 09: Declare Custom JPQL @Query">
+                <img src="../assets/images/week-13/task-1/step-09.png" alt="Step 09: Declare Custom JPQL @Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare @Query("SELECT s FROM Student s WHERE s.rollNumber = :roll").</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 10</span>
+                <span class="step-card-title">Declare Native SQL @Query</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 10: Declare Native SQL @Query">
+                <img src="../assets/images/week-13/task-1/step-10.png" alt="Step 10: Declare Native SQL @Query" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Declare @Query(value = "SELECT * FROM student WHERE first_name = :fn", nativeQuery = true).</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 11</span>
+                <span class="step-card-title">Implement QueryController</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 11: Implement QueryController">
+                <img src="../assets/images/week-13/task-1/step-11.png" alt="Step 11: Implement QueryController" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Expose REST endpoints for each derived and custom query method.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 12</span>
+                <span class="step-card-title">Run Application & Preload Data</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 12: Run Application & Preload Data">
+                <img src="../assets/images/week-13/task-1/step-12.png" alt="Step 12: Run Application & Preload Data" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Launch application in STS and insert test student records into database.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 13</span>
+                <span class="step-card-title">Test findByFirstName in Browser</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 13: Test findByFirstName in Browser">
+                <img src="../assets/images/week-13/task-1/step-13.png" alt="Step 13: Test findByFirstName in Browser" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Test /students/find?firstName=Pooja verifying single field query result.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 14</span>
+                <span class="step-card-title">Test OrderBy Query in Browser</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 14: Test OrderBy Query in Browser">
+                <img src="../assets/images/week-13/task-1/step-14.png" alt="Step 14: Test OrderBy Query in Browser" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Test /students/order?lastName=Chandran verifying sorted alphabetical result.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 15</span>
+                <span class="step-card-title">Test Compound Queries in Browser</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 15: Test Compound Queries in Browser">
+                <img src="../assets/images/week-13/task-1/step-15.png" alt="Step 15: Test Compound Queries in Browser" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Test compound AND / OR queries verifying multi-field filter results.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 16</span>
+                <span class="step-card-title">Test Native SQL Query in Browser</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 16: Test Native SQL Query in Browser">
+                <img src="../assets/images/week-13/task-1/step-16.png" alt="Step 16: Test Native SQL Query in Browser" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Test /students/native?fn=Pooja verifying native query output.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 17</span>
+                <span class="step-card-title">Inspect Hibernate SQL in Console</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 17: Inspect Hibernate SQL in Console">
+                <img src="../assets/images/week-13/task-1/step-17.png" alt="Step 17: Inspect Hibernate SQL in Console" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">STS console logs display automated translation of method names to SQL.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-card-header">
+                <span class="step-num">Step 18</span>
+                <span class="step-card-title">Verify Execution Metrics</span>
+              </div>
+              <div class="step-img-wrap" data-title="Step 18: Verify Execution Metrics">
+                <img src="../assets/images/week-13/task-1/step-18.png" alt="Step 18: Verify Execution Metrics" loading="lazy" />
+                <span class="step-zoom-tag">🔍 Click to Zoom</span>
+              </div>
+              <div class="step-card-body">
+                <p class="step-desc">Verify query execution metrics and clean database connection cleanup.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+<section class="content-section" id="result-analysis">
+          <h2 class="content-section-title"><span class="section-icon">📊</span> 6. Result Analysis &amp; Discussion</h2>
+          <div class="analysis-grid">
+            <div class="analysis-card">
+              <div class="analysis-card-title">🔍 Abstract Syntax Tree (AST) Parsing</div>
+              <p>Spring Data JPA parses method identifiers using a recursive descent parser, stripping prefixes (<code>findBy</code>) and splitting keywords (<code>And</code>, <code>Or</code>, <code>OrderBy</code>) to compile an Abstract Syntax Tree (AST) translated directly into criteria queries.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">⚡ Compile-Time Type Safety</div>
+              <p>If an entity property name is misspelled in the method signature (e.g. <code>findByFristName</code>), Spring Boot fails immediately during bean creation at application startup, eliminating silent runtime SQL syntax errors.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">🛡️ SQL Injection Immunity with @Param</div>
+              <p>Both derived queries and <code>@Query</code> annotations utilize parameterized positional or named bindings (<code>:fn</code>), ensuring database drivers treat user inputs strictly as literal values rather than executable SQL commands.</p>
+            </div>
+            <div class="analysis-card">
+              <div class="analysis-card-title">💡 JPQL vs Native SQL Portability</div>
+              <p>Derived methods and JPQL target entity names and operate identically across H2, MySQL, Oracle, and PostgreSQL. Native queries (<code>nativeQuery = true</code>) bypass JPA abstraction to access vendor-specific database features (full-text search, window functions).</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="gallery">
+          <div class="gallery-section-header">
+            <h2 class="content-section-title mb-0" style="border-bottom:none;padding-bottom:0">
+              <span class="section-icon">🖼️</span> 7. Step-by-Step Execution Gallery (Figures 13.1–13.7)
+            </h2>
+            <span class="badge badge-purple">7 Authentic Figures</span>
+          </div>
+          <p>Extracted directly from student submission (Week_13.pdf):</p>
+          <div class="gallery-grid">
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.1</span><span class="ss-counter-badge">[1 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.1: StudentRepository Interface"><img src="../assets/images/week-13/week-13_img_1.jpg" alt="Figure 13.1" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Repository Derived Query Methods</div><div class="ss-subcaption">Authoring all 8 derived query method signatures in STS.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.2</span><span class="ss-counter-badge">[2 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.2: Native @Query Implementation"><img src="../assets/images/week-13/week-13_img_2.jpg" alt="Figure 13.2" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Custom Native SQL @Query</div><div class="ss-subcaption">Configuring fetchByFirstName with nativeQuery=true.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.3</span><span class="ss-counter-badge">[3 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.3: findByFirstName Output"><img src="../assets/images/week-13/week-13_img_3.jpg" alt="Figure 13.3" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">findByFirstName Browser Output</div><div class="ss-subcaption">Browser verifying single field criteria query results.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.4</span><span class="ss-counter-badge">[4 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.4: OrderBy Query Output"><img src="../assets/images/week-13/week-13_img_4.jpg" alt="Figure 13.4" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">OrderBy Ascending Output</div><div class="ss-subcaption">Verifying records sorted alphabetically by firstName.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.5</span><span class="ss-counter-badge">[5 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.5: And/Or Compound Query Output"><img src="../assets/images/week-13/week-13_img_5.png" alt="Figure 13.5" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Compound AND/OR Output</div><div class="ss-subcaption">Browser response verifying multi-condition evaluation.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.6</span><span class="ss-counter-badge">[6 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.6: Native SQL Query Output"><img src="../assets/images/week-13/week-13_img_6.jpg" alt="Figure 13.6" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Native SQL Query Output</div><div class="ss-subcaption">Verifying results returned by custom native SQL @Query.</div></div>
+            </div>
+            <div class="ss-card">
+              <div class="ss-card-header"><span class="ss-step-badge">Figure 13.7</span><span class="ss-counter-badge">[7 / 7]</span></div>
+              <div class="ss-img-wrap" data-title="Figure 13.7: STS Console Hibernate Generated SQL"><img src="../assets/images/week-13/week-13_img_7.png" alt="Figure 13.7" /><div class="ss-zoom-overlay">🔍 Click to Zoom</div></div>
+              <div class="ss-card-body"><div class="ss-caption">Hibernate SQL Console Logs</div><div class="ss-subcaption">STS console logs verifying automated SQL translation.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="result">
+          <h2 class="content-section-title"><span class="section-icon">🏁</span> 8. Conclusion</h2>
+          <div class="outcome-list">
+            <div class="outcome-item"><span class="check">✔</span> Implemented all 8 prescribed derived query methods in <code>StudentRepository</code>.</div>
+            <div class="outcome-item"><span class="check">✔</span> Evaluated sorting (<code>OrderBy</code>) and result set limiting (<code>First10</code>) grammar.</div>
+            <div class="outcome-item"><span class="check">✔</span> Verified native SQL execution with parameterized bindings via <code>@Query</code>.</div>
+            <div class="outcome-item"><span class="check">✔</span> Documented all 7 authentic figures validating end-to-end execution.</div>
+          </div>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- IMAGE ZOOM LIGHTBOX MODAL -->
+  <div id="zoom-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-label="Screenshot Preview">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close Preview" title="Close (Esc)">&times;</button>
+      <img src="" alt="Screenshot Preview" class="modal-img" />
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+
+  <!-- STUDENT PROFILE DETAILS MODAL -->
+  <div id="studentProfileModal" class="student-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="student-modal-card">
+      <button class="student-modal-close" id="studentModalCloseBtn" aria-label="Close Profile Details" title="Close (Esc)">&times;</button>
+      <div class="student-modal-header">
+        <div class="student-modal-photo-wrap">
+          <img src="../assets/images/student_photo.jpg" alt="CHINNATHAMBI NARAYANAN POOJA CHANDRAN" class="student-modal-photo" />
+          <span class="verified-ribbon">✓ Verified Student</span>
+        </div>
+        <div class="student-modal-title-area">
+          <span class="modal-dept-badge">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+          <h2 id="studentModalTitle" class="student-modal-name">CHINNATHAMBI NARAYANAN POOJA CHANDRAN</h2>
+          <div class="student-modal-roll-highlight">
+            <span class="roll-label">Roll Number</span>
+            <span class="roll-number">24EU08145</span>
+          </div>
+          <p class="student-modal-institution">Siddhartha Academy of Higher Education</p>
+        </div>
+      </div>
+
+      <div class="student-modal-body">
+        <div class="student-details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div class="detail-text">
+              <span class="detail-label">Degree & Program</span>
+              <span class="detail-value">B.Tech in Information Technology</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💻</span>
+            <div class="detail-text">
+              <span class="detail-label">Laboratory Course</span>
+              <span class="detail-value">Advanced Java Programming Lab</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📋</span>
+            <div class="detail-text">
+              <span class="detail-label">Course Code</span>
+              <span class="detail-value">24IT385</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🗓️</span>
+            <div class="detail-text">
+              <span class="detail-label">Academic Year</span>
+              <span class="detail-value">2026 – 2027</span>
+            </div>
+          </div>
+          <div class="detail-item detail-full-width">
+            <span class="detail-icon">🏛️</span>
+            <div class="detail-text">
+              <span class="detail-label">Department & Institution</span>
+              <span class="detail-value">Department of Information Technology · Siddhartha Academy of Higher Education</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-modal-footer">
+          <div class="footer-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Digital Laboratory Record · All 14 Weeks Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background:#1E1B18;color:#DDD5C8;padding:40px 24px 28px;border-top:2px solid #542B36;">
+    <div style="max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <div style="font-family:var(--font-heading);font-weight:800;color:#FFFEFA;font-size:1.05rem;letter-spacing:0.04em;">Advanced Java Programming Lab Record (24IT385) · Technical Field Journal</div>
+        <div style="font-size:0.84rem;margin-top:4px;">CHINNATHAMBI NARAYANAN POOJA CHANDRAN · Roll Number: <strong style="color:#C58A45;">24EU08145</strong> · Department of Information Technology</div>
+        <div style="font-size:0.78rem;color:#A39D95;">Siddhartha Academy of Higher Education · Academic Year 2026–2027</div>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <a href="../../24EU08145.html" class="btn btn-secondary btn-sm" style="color:#FFFEFA;border-color:#542B36;background:#542B36;">🏠 Home Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
